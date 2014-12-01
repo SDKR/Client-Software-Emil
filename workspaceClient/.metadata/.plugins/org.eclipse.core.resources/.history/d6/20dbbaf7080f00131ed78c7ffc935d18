@@ -1,0 +1,19 @@
+
+public class HelloWorld {
+
+	public static void main (String [] args)
+	{
+		int tal1 = 5;
+		while(tal1<=30) {
+			
+			System.out.println(tal1);
+			tal1++;
+			
+		
+		}
+	
+		System.out.println(Nummi);
+		
+	}
+	
+}

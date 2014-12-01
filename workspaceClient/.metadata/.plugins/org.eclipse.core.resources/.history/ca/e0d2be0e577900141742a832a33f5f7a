@@ -1,0 +1,20 @@
+package GUILogic;
+
+import java.sql.SQLException;
+
+import GUI.ContainerPanel;
+
+public class Logic {
+	private ContainerPanel CP;
+	
+	public Logic() throws SQLException {
+		CP = new ContainerPanel();
+//		initializeListeners();
+	}
+	
+	public void startList() {
+		CP.show(ContainerPanel.loginScreen);
+		CP.setVisible(true);
+	}
+
+}

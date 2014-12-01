@@ -1,0 +1,15 @@
+
+public class HelloWorld {
+
+	public static void main (String [] args)
+	{
+		int tal1 = 0;
+		while(tal1<=19) {
+			
+			System.out.println(tal1);
+			tal1++;
+		}
+	
+	}
+	
+}

@@ -1,0 +1,13 @@
+import GUILogic.Logic;
+
+
+public class run {
+
+	public static void main(String[] args) {
+
+		Logic GUILogic = new Logic();
+		GUILogic.startApp();
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;reader1&apos; to &apos;KeyGetter&apos;&#x0D;&#x0A;- Original project: &apos;Guy on a buffalooo&apos;&#x0D;&#x0A;- Original element: &apos;reader1&apos;&#x0D;&#x0A;- Renamed element: &apos;KeyGetter&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;reader1&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{reader1.java[reader1" matchStrategy="1" name="KeyGetter" qualified="false" references="true" similarDeclarations="false" stamp="1416220465261" textual="false" version="1.0"/>
+</session>

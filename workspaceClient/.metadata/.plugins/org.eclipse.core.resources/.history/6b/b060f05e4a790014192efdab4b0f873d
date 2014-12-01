@@ -1,0 +1,76 @@
+package GUI;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.BevelBorder;
+
+import java.awt.Color;
+
+import java.awt.Cursor;
+
+import javax.swing.SwingConstants;
+
+import java.awt.Dimension;
+import javax.swing.JTextPane;
+
+	public class Login extends JPanel {
+		private JTextField Email;
+		private JTextField textField;
+		
+//		The panel itself
+		
+		public Login() {
+			setLayout(null);
+			setPreferredSize(new Dimension(1366, 768));
+			
+			JLabel lblJegErLogin = new JLabel("Login here:\r\n");
+			lblJegErLogin.setFont(new Font("Tahoma", Font.BOLD, 34));
+			lblJegErLogin.setBounds(587, 286, 192, 41);
+			add(lblJegErLogin);
+			
+			JLabel lblWelcomeToThe = new JLabel("Welcome to your calendar");
+			lblWelcomeToThe.setFont(new Font("Tahoma", Font.BOLD, 34));
+			lblWelcomeToThe.setBounds(460, 157, 445, 41);
+			add(lblWelcomeToThe);
+			
+			Email = new JTextField();
+			Email.setBounds(587, 362, 192, 32);
+			add(Email);
+			Email.setColumns(10);
+			
+			JLabel lblEmailAddress = new JLabel("Email Address:");
+			lblEmailAddress.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblEmailAddress.setBounds(433, 368, 110, 19);
+			add(lblEmailAddress);
+			
+			textField = new JTextField();
+			textField.setColumns(10);
+			textField.setBounds(587, 425, 192, 32);
+			add(textField);
+			
+			JLabel lblPassword = new JLabel("Password:\r\n");
+			lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblPassword.setBounds(433, 431, 110, 19);
+			add(lblPassword);
+			
+			JButton btnNewButton = new JButton("Login");
+			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnNewButton.setBounds(623, 492, 119, 41);
+			add(btnNewButton);
+			
+
+			
+		}
+}

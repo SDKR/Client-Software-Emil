@@ -1,0 +1,13 @@
+package GUI;
+
+import java.awt.CardLayout;
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class ContainerPanel extends JFrame {
+	
+	public static final String loginScreen = "LoginScreen";
+
+}

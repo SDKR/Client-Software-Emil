@@ -1,0 +1,13 @@
+package GUILogic;
+
+import GUI.ContainerPanel;
+
+public class Logic {
+	private ContainerPanel CP;
+	
+	public void startList() {
+		CP.show(ContainerPanel.loginScreen);
+		CP.setVisible(true);
+	}
+
+}

@@ -1,0 +1,19 @@
+package connections;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import json.AuthUserJson;
+
+public class ServerKeeper {
+	
+	public String userChecker(String email, String password){
+		Gson gson = new GsonBuilder().create();
+		AuthUserJson AUJ = new AuthUserJson();
+		AUJ.setAuthUserEmail(email);
+		AUJ.setAuthUserPassword(password);
+		String gsonString = gson.toJson(AUJ);
+		return gsonString;
+
+	}
+}

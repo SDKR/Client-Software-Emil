@@ -1,0 +1,14 @@
+package GUI;
+
+import javax.swing.JPanel;
+
+public class MainMenu extends JPanel {
+	public MainMenu() {
+		
+		public MainMenu() {
+			setLayout(null);
+			setPreferredSize(new Dimension(1366, 768));
+			
+	}
+
+}
