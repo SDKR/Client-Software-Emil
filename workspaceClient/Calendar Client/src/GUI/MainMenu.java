@@ -4,14 +4,17 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class MainMenu extends JPanel {
 	private JButton btnFCalendar = new JButton("Full Calendar");
 	private JButton btnCreateEvent = new JButton("Create Calendar and Event");
 	private JButton btnCreateNote = new JButton("Create Note");
-	private JButton btnLogOff = new JButton("Log Off");
+	private JButton btnLogOff = new JButton("LogOff");
 	private JButton button_2 = new JButton("New button");
 	
 		
@@ -59,18 +62,23 @@ public class MainMenu extends JPanel {
 			lblQuoteOfThe.setBounds(594, 325, 177, 25);
 			add(lblQuoteOfThe);
 			
-			JLabel lblKftHvorEr = new JLabel("K\u00E6ft hvor er det varmt og dejligt.... NOT!?! velkommen til DK\r\nDer er 22 grader i LA lige nu!");
-			lblKftHvorEr.setBounds(544, 117, 452, 50);
+			JLabel lblKftHvorEr = new JLabel("K\u00E6ft hvor er det varmt og dejligt.... NOT!?! velkommen til DK");
+			lblKftHvorEr.setBounds(544, 117, 475, 50);
 			add(lblKftHvorEr);
 			
-			JLabel lblOgHitlerSagde = new JLabel("Og Hitler sagde: kochen Schwanz und essen sie heute Abend");
-			lblOgHitlerSagde.setBounds(544, 375, 295, 14);
+			JLabel lblOgHitlerSagde = new JLabel("Und Hitler sagte: kochen Schwanz und essen sie heute Abend");
+			lblOgHitlerSagde.setBounds(544, 375, 381, 14);
 			add(lblOgHitlerSagde);
 			
 	}
+		
+		public void addActionListenerLogOff(ActionListener l){
+			btnLogOff.addActionListener(l);
+		}
 
-		public void addActionListenerLoginScreen(ActionListener l){
-			btn.addActionListener(l);
+
+		public JButton getBtnLogOff() {
+			return btnLogOff;
 		}
 
 		public JButton getBtnFCalendar() {

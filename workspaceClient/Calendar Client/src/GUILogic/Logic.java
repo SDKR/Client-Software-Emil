@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import connections.ServerKeeper;
 import GUI.ContainerPanel;
+import GUI.MainMenu;
 
 public class Logic {
 	ServerKeeper SK = new ServerKeeper();
@@ -36,7 +37,7 @@ public class Logic {
 			if(SK.userChecker(emailInput, passwordInput).equals("1"))
 			{
 				System.out.println("Så langt så godt");
-//				CP.show(ContainerPanel.mainMenu);
+				CP.show(ContainerPanel.mainMenu);
 			}
 			else
 			{
@@ -44,9 +45,20 @@ public class Logic {
 			}
 		}
 	}
+	
+	private class LogOff implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.loginScreen);
+		
+			
+		}
+		
+	}
+	
 
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
+		CP.getMM().addActionListenerLogOff(new LogOff());
 		
 	}
 	
