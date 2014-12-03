@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class MainMenu extends JPanel {
 	private JButton btnFCalendar = new JButton("Full Calendar");
@@ -16,6 +17,8 @@ public class MainMenu extends JPanel {
 	private JButton btnCreateNote = new JButton("Create Note");
 	private JButton btnLogOff = new JButton("LogOff");
 	private JButton button_2 = new JButton("New button");
+	private JTextField weatherbox = new JTextField();
+	private JTextField QOTDtxt = new JTextField();
 	
 		
 		public MainMenu() {
@@ -54,28 +57,40 @@ public class MainMenu extends JPanel {
 			
 			JLabel lblTodaysWeather = new JLabel("Todays Weather");
 			lblTodaysWeather.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblTodaysWeather.setBounds(599, 78, 167, 25);
+			lblTodaysWeather.setBounds(681, 78, 167, 25);
 			add(lblTodaysWeather);
+			
+//			Textbox for weather
+			weatherbox.setBounds(615, 117, 352, 20);
+			add(weatherbox);
+			weatherbox.setColumns(10);
 			
 			JLabel lblQuoteOfThe = new JLabel("Quote Of The Day");
 			lblQuoteOfThe.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblQuoteOfThe.setBounds(594, 325, 177, 25);
+			lblQuoteOfThe.setBounds(676, 325, 177, 25);
 			add(lblQuoteOfThe);
 			
-			JLabel lblKftHvorEr = new JLabel("K\u00E6ft hvor er det varmt og dejligt.... NOT!?! velkommen til DK");
-			lblKftHvorEr.setBounds(544, 117, 475, 50);
-			add(lblKftHvorEr);
-			
-			JLabel lblOgHitlerSagde = new JLabel("Und Hitler sagte: kochen Schwanz und essen sie heute Abend");
-			lblOgHitlerSagde.setBounds(544, 375, 381, 14);
-			add(lblOgHitlerSagde);
+//			Textbox for quote of the day
+			QOTDtxt.setBounds(615, 361, 352, 20);
+			add(QOTDtxt);
+			QOTDtxt.setColumns(10);
 			
 	}
 		
+//		Action listeners
 		public void addActionListenerLogOff(ActionListener l){
 			btnLogOff.addActionListener(l);
 		}
 
+		
+//		Getters and setters
+		public JTextField getWeatherbox() {
+			return weatherbox;
+		}
+
+		public void setWeatherbox(JTextField weatherbox) {
+			this.weatherbox = weatherbox;
+		}
 
 		public JButton getBtnLogOff() {
 			return btnLogOff;
@@ -98,6 +113,14 @@ public class MainMenu extends JPanel {
 
 		public JButton getButton_2() {
 			return button_2;
+		}
+
+		public JTextField getQOTDtxt() {
+			return QOTDtxt;
+		}
+
+		public void setQOTDtxt(JTextField qOTDtxt) {
+			QOTDtxt = qOTDtxt;
 		}
 		
 		

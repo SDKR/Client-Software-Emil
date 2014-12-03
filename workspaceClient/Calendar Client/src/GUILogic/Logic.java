@@ -6,13 +6,15 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import connections.ServerKeeper;
+import connections.ServerManager;
 import GUI.ContainerPanel;
 import GUI.MainMenu;
+import connections.ServerManager;
 
 public class Logic {
-	ServerKeeper SK = new ServerKeeper();
+	ServerManager SM = new ServerManager();
 	private ContainerPanel CP;
+	
 	
 	private String EmailKeeper;
 	private String PassKeeper;
@@ -34,10 +36,13 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 			String emailInput = CP.getLI().getTextFieldEmail().getText();
 			String passwordInput = CP.getLI().getTextFieldPassword().getText();
-			if(SK.userChecker(emailInput, passwordInput).equals("1"))
+			if(SM.userChecker(emailInput, passwordInput).equals("1"))
 			{
 				System.out.println("Så langt så godt");
 				CP.show(ContainerPanel.mainMenu);
+				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
+				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
+				
 			}
 			else
 			{

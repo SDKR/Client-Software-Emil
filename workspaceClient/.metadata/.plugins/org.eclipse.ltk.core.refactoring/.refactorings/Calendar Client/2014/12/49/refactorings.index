@@ -8,3 +8,10 @@
 1417440253277	Delete element
 1417440662749	Rename type 'Server'
 1417441123027	Rename method 'getTextFieldUsername'
+1417593624960	Rename type 'ServerKeeper'
+1417594280491	Rename field 'SK'
+1417596735720	Rename type 'QOTDJon'
+1417597094032	Rename type 'QOTDJson'
+1417597167031	Rename type 'QuoteJson'
+1417597349530	Rename type 'CreateCalendar'
+1417597523724	Rename type 'CreateCalendar'

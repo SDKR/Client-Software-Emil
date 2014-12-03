@@ -1,0 +1,69 @@
+package GUILogic;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import connections.ServerManager;
+import GUI.ContainerPanel;
+import GUI.MainMenu;
+import connections.ServerManager;
+
+public class Logic {
+	ServerManager SM = new ServerManager();
+	private ContainerPanel CP;
+	
+	
+	private String EmailKeeper;
+	private String PassKeeper;
+	private int AdminIntKeeper; /* skal måske bruges senere */
+	
+	public Logic() throws SQLException {
+		CP = new ContainerPanel();
+		initializeListeners();
+	}
+	
+//	Starts GUI 
+	public void startList() {
+		CP.show(ContainerPanel.loginScreen);
+		CP.setVisible(true);
+	}
+	
+//	Login function and error message
+	private class login implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String emailInput = CP.getLI().getTextFieldEmail().getText();
+			String passwordInput = CP.getLI().getTextFieldPassword().getText();
+			if(SM.userChecker(emailInput, passwordInput).equals("1"))
+			{
+				System.out.println("Så langt så godt");
+				CP.show(ContainerPanel.mainMenu);
+				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Gets the weather from server*/
+				
+			}
+			else
+			{
+				JOptionPane.showMessageDialog (null, "You have entered an incorrect username or password", "Information", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+	
+	private class LogOff implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.loginScreen);
+		
+			
+		}
+		
+	}
+	
+
+	private void initializeListeners() {
+		CP.getLI().addActionListenerLoginScreen(new login());
+		CP.getMM().addActionListenerLogOff(new LogOff());
+		
+	}
+	
+}
