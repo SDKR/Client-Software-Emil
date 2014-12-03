@@ -14,7 +14,6 @@ INDEX VERSION 1.126+C:\Users\Emil Laptop\Desktop\Klient Software github\Client-S
 2309377952.index
 3133528496.index
 1115467115.index
-2893599869.index
 577343764.index
 3857051259.index
 4098414651.index
