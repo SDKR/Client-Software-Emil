@@ -60,11 +60,10 @@ public class Logic {
 		
 		}}
 		
-//	Create Eventmenu button
-	private class Event implements ActionListener{
+//	Create Event button
+	private class CreateEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.createevent);
-			setComboDates();
 		}
 	}
 	
@@ -134,11 +133,10 @@ public class Logic {
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
 		CP.getMM().addActionListenerLogOff(new LogOff());
-		CP.getMM().addActionListenerCreateEvent(new Event());
-		CP.getCE().createEventListener(new createEvent());
+		CP.getMM().addActionListenerCreateEvent(new CreateEvent());
+		CP.getCE().addcreateEventListener(new createEvent());
 		
 	}
-
 	
 }
 

@@ -10,12 +10,11 @@ import connections.ServerManager;
 import GUI.ContainerPanel;
 import GUI.MainMenu;
 import connections.ServerManager;
-import GUI.CreateEvent;
 
 public class Logic {
 	ServerManager SM = new ServerManager();
 	private ContainerPanel CP;
-	private CreateEvent CE;
+	private GUI.CreateEvent CE;
 	
 	
 	private String EmailKeeper;
@@ -60,36 +59,10 @@ public class Logic {
 		
 		}}
 		
-//	Create Eventmenu button
-	private class Event implements ActionListener{
+//	Create Event button
+	private class CreateEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.createevent);
-			setComboDates();
-		}
-	}
-	
-//	Logic for the comboboxes in createEvent
-	public void setComboDates() {
-		for (int yCount = 2014; yCount < 2038; yCount++) {
-
-			CP.getCE().getStartYear().addItem(yCount);
-			CP.getCE().getEndYear().addItem(yCount);
-		}
-		for (int moCount = 1; moCount < 13; moCount++) {
-			CP.getCE().getStartMonth().addItem(moCount);
-			CP.getCE().getEndMonth().addItem(moCount);
-		}
-		for (int dCount = 1; dCount < 32; dCount++) {
-			CP.getCE().getStartDay().addItem(dCount);
-			CP.getCE().getEndDay().addItem(dCount);
-		}
-		for (int hCount = 1; hCount < 25; hCount++) {
-			CP.getCE().getStartHour().addItem(hCount);
-			CP.getCE().getEndhour().addItem(hCount);
-		}
-		for (int miCount = 1; miCount < 60; miCount++) {
-			CP.getCE().getStartMinute().addItem(miCount);
-			CP.getCE().getEndMinute().addItem(miCount);
 		}
 	}
 	
@@ -134,11 +107,9 @@ public class Logic {
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
 		CP.getMM().addActionListenerLogOff(new LogOff());
-		CP.getMM().addActionListenerCreateEvent(new Event());
-		CP.getCE().createEventListener(new createEvent());
+		CP.getMM().addActionListenerCreateEvent(new createEvent());
 		
 	}
-
 	
 }
 

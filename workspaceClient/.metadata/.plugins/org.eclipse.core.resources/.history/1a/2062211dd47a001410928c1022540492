@@ -10,7 +10,6 @@ import connections.ServerManager;
 import GUI.ContainerPanel;
 import GUI.MainMenu;
 import connections.ServerManager;
-import GUI.CreateEvent;
 
 public class Logic {
 	ServerManager SM = new ServerManager();
@@ -60,11 +59,10 @@ public class Logic {
 		
 		}}
 		
-//	Create Eventmenu button
-	private class Event implements ActionListener{
+//	Create Event button
+	private class CreateEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.createevent);
-			setComboDates();
 		}
 	}
 	
@@ -134,11 +132,9 @@ public class Logic {
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
 		CP.getMM().addActionListenerLogOff(new LogOff());
-		CP.getMM().addActionListenerCreateEvent(new Event());
-		CP.getCE().createEventListener(new createEvent());
+		CP.getMM().addActionListenerCreateEvent(new createEvent());
 		
 	}
-
 	
 }
 
