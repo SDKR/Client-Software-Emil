@@ -81,11 +81,7 @@ public class MainMenu extends JPanel {
 		public void addActionListenerLogOff(ActionListener l){
 			btnLogOff.addActionListener(l);
 		}
-		
-		public void addActionListenerCreateEvent(ActionListener l){
-			btnCreateEvent.addActionListener(l);
-		}
-		
+
 		
 //		Getters and setters
 		public JTextField getWeatherbox() {

@@ -14,7 +14,6 @@ import connections.ServerManager;
 public class Logic {
 	ServerManager SM = new ServerManager();
 	private ContainerPanel CP;
-	private GUI.CreateEvent CE;
 	
 	
 	private String EmailKeeper;
@@ -56,21 +55,16 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.loginScreen);
 		
-		}}
-		
-	private class CreateEvent implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			CP.show(ContainerPanel.createevent);
+			
 		}
+		
 	}
 	
 
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
 		CP.getMM().addActionListenerLogOff(new LogOff());
-		CP.getMM().addActionListenerCreateEvent(new CreateEvent());
 		
 	}
 	
 }
-

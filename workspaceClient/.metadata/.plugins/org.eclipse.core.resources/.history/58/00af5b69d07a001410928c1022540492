@@ -56,7 +56,7 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.loginScreen);
 		
-		}}
+		}
 		
 	private class CreateEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
@@ -73,4 +73,4 @@ public class Logic {
 	}
 	
 }
-
+}

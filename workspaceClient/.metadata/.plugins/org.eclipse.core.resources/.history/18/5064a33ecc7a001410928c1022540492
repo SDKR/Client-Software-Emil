@@ -17,8 +17,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.DefaultComboBoxModel;
 
 public class CreateEvent extends JPanel{
-	
-	
 
 	//Buttons
 	private JButton mainMenuBtn = new JButton("Back");
@@ -46,7 +44,7 @@ public class CreateEvent extends JPanel{
 	 * Create the panel.
 	 */
 	
-	public CreateEvent() {
+	public EventGUI() {
 		setLayout(null);
 		setBounds(0,0,1366,768);
 		

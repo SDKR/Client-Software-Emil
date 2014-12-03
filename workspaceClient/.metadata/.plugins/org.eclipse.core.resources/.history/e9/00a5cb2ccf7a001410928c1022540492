@@ -88,7 +88,7 @@ public class ContainerPanel extends JFrame {
 		return MM;
 	}
 	
-	public CreateEvent getCE() {
+	public CreateEvent() {
 		return CE;
 	}
 

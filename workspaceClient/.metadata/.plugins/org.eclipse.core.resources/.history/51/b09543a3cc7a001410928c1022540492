@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import json.AuthUserJson;
-import json.CreateEventJson;
 import json.QOTDJson;
 import json.WeatherJson;
 import TCPSocket.TCPConnect;
@@ -78,7 +77,7 @@ public class ServerManager {
 //	CreateEvent
 	public String createEvent(String eventName, String eventLocation, String eventInfo, String eventTypeCombo, String startYear, String startMonth, String startDay, String startHour, String startMinute, String endYear, String endMonth, String endDay, String endHour, String endMinute, String Calendar){
 		String stringToBeReturned = "";
-		CreateEventJson EJ1 = new CreateEventJson();
+		EventsJson EJ1 = new EventsJson();
 		EJ1.setName(eventName);
 		EJ1.setLocationName(eventLocation);
 		EJ1.setText(eventInfo);

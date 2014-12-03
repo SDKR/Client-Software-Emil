@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 public class ContainerPanel extends JFrame {
 	public static final String loginScreen = "LoginScreen";
 	public static final String mainMenu = "MainMenu";
-	public static final String createevent = "CreateEvent";
 //	public static final String userView = "UserView";
 //	public static final String eventView = "EventView";
 //	public static final String noteView = "NoteView";
@@ -22,7 +21,6 @@ public class ContainerPanel extends JFrame {
 	CardLayout c;
 	
 	private Login LI;
-	private CreateEvent CE;
 //	private EventList eList;
 	private MainMenu MM;
 //	private NoteList NL;
@@ -50,9 +48,6 @@ public class ContainerPanel extends JFrame {
 		
 		MM = new MainMenu();
 		contentPane.add(MM, mainMenu);
-		
-		CE = new CreateEvent();
-		contentPane.add(CE, createevent);
 		
 		
 	}
@@ -86,10 +81,6 @@ public class ContainerPanel extends JFrame {
 //
 	public MainMenu getMM() {
 		return MM;
-	}
-	
-	public CreateEvent getCE() {
-		return CE;
 	}
 
 //	public NoteList getNL() {
