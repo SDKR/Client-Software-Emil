@@ -37,6 +37,8 @@ public class Logic {
 		CP.setVisible(true);
 	}
 	
+//	General menu button functions 
+	
 //	Login function and error message
 	private class login implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -49,8 +51,7 @@ public class Logic {
 				CP.show(ContainerPanel.mainMenu); 	/*Show main menu*/
 				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
 				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
-				setDayView();
-				setWeekView();
+				setDayView(); /*Gets todays calendar info for the main menu*/
 				
 			}
 			else
@@ -71,13 +72,15 @@ public class Logic {
 	private class WeeklyCalendar implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.WeeklyCalendar);
+			setWeekView(); /*Gets this weeks calendar info for this menu*/
 			
 		}}
 		
 //	Calendar Functions Button
 	private class CalendarFunctions implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			CP.show(ContainerPanel.CalendarFunctions);		
+			CP.show(ContainerPanel.CalendarFunctions);
+			getCalendars(); /*Runs the get all calendars function in the menu*/
 		}}
 	
 //	Back button
@@ -94,6 +97,8 @@ public class Logic {
 			setComboDates();
 		}
 	}
+	
+//	Supporting GUI Logic 
 	
 //	Logic for the comboboxes in createEvent
 	public void setComboDates() {
@@ -120,7 +125,7 @@ public class Logic {
 		}
 	}
 	
-//	Create event logic
+//	Create event logic // Get all the strings!
 	private class createEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 	
@@ -202,7 +207,7 @@ public class Logic {
 		}
 	}
 	
-//	Day view logic
+//	Day view logic // Main menu
 	private void setDayView()
 	{
 		String[][] dayDate = SM.daysevents(UserKeeper);
@@ -243,6 +248,7 @@ public class Logic {
 		}
 	}
 	
+//	Week view logic // For the Your Week menu 
 	private void setWeekView()
 	{
 		String[][] weekDate = SM.getEventsFromUSerWeek(UserKeeper);
@@ -283,6 +289,48 @@ public class Logic {
 		
 	}
 	
+//	Gets all calendars for the calendar functions GUI 
+	private void getCalendars()
+	{
+		String[][] calendarData = SM.getAllCalendars();
+		System.out.println(calendarData[1][1]);
+		int arrayCounter = calendarData[0].length;
+		int arrayChecker = 0;
+		int arrayCheckerPlus = 0;
+		for (int reset = 1; reset < 99; reset++) {
+			System.out.println("Vi er inde i for-loop " + reset + ". gang");
+			// Sets every field in a Jtable equals nothing
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 0);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 1);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 2);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 3);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 4);
+		}
+
+		while (arrayChecker < arrayCounter) {
+			try
+			{
+				if(!calendarData[0][arrayChecker].isEmpty())
+				{
+				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
+				CP.getCF().getCalendarTable().setValueAt(calendarData[0][arrayChecker], arrayCheckerPlus, 0);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[1][arrayChecker], arrayCheckerPlus, 1);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[2][arrayChecker], arrayCheckerPlus, 2);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[3][arrayChecker], arrayCheckerPlus, 3);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[4][arrayChecker], arrayCheckerPlus, 4);
+				arrayChecker++;
+				arrayCheckerPlus++;
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Well... We Try again");
+				arrayChecker++;
+			}
+		}
+		
+	}
+	
 //	Initializelist for listeners
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
@@ -300,6 +348,8 @@ public class Logic {
 		
 	}
 
+//	Getters and setters list
+	
 	public int getAdminKeeper() {
 		return AdminKeeper;
 	}

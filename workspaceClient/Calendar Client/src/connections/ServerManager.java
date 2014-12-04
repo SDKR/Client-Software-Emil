@@ -9,6 +9,7 @@ import json.CreateEventJson;
 import json.DeleteCalendarJson;
 import json.EventsDayJson;
 import json.EventsWeekJson;
+import json.GetAllCalendarJson;
 import json.QOTDJson;
 import json.WeatherJson;
 import json.userToCalendar;
@@ -201,6 +202,22 @@ public class ServerManager {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public String[][] getAllCalendars() {
+		String[][] stringArrayToBeReturned = null;
+		GetAllCalendarJson GAC = new GetAllCalendarJson();
+		String gsonString = gson.toJson(GAC);
+		try
+		{
+			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return stringArrayToBeReturned;
 	}
 	
 }

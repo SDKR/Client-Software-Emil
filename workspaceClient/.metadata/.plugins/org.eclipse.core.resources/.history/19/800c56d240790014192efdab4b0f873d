@@ -1,9 +1,0 @@
-package GUILogic;
-
-import GUI.ContainerPanel;
-
-public class GUILogic {
-	
-
-
-}
