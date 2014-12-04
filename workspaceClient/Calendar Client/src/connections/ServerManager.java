@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import json.AuthUserJson;
 import json.CreateEventJson;
+import json.EventsDayJson;
 import json.QOTDJson;
 import json.WeatherJson;
 import TCPSocket.TCPConnect;
@@ -111,5 +112,24 @@ public class ServerManager {
 		//String eventOutput = EJ2.getCalendarID() /*+ " " + EJ2.getLocation() */+ " " + EJ2.getLocationName() + " " + EJ2.getName() + " " + EJ2.getText() + " " + EJ2.getType() + " " + EJ2.getStartYear() + " " + EJ2.getStartMonth() + " " + EJ2.getStartDay() + " " + EJ2.getStartHour() + " " + EJ2.getStartMinute() + " " + EJ2.getEndYear() + " " + EJ2.getEndMonth() + " " + EJ2.getEndDay() + " " + EJ2.getEndHour() + " " + EJ2.getEndMinute() + " " + EJ2.getCalendarID();
 		return stringToBeReturned;
 	}
+	
+//	Get daily events
+	public String[][] daysevents(String AdminKeeper) {
+		String[][] stringArrayToBeReturned = null;
+		EventsDayJson EDJ = new EventsDayJson();
+		EDJ.setCreatedby(AdminKeeper);
+		String gsonString = gson.toJson(EDJ);
+		try
+		{ 
+			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
+			System.out.println(stringArrayToBeReturned[2][4]);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return stringArrayToBeReturned;
+	}
+	
 	
 }

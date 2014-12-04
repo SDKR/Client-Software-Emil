@@ -20,7 +20,7 @@ public class Logic {
 	
 	private String EmailKeeper;
 	private String PassKeeper;
-	private int AdminIntKeeper; /* skal måske bruges senere */
+	private int AdminKeeper; /* skal måske bruges senere */
 	
 	public Logic() throws SQLException {
 		CP = new ContainerPanel();
@@ -59,6 +59,9 @@ public class Logic {
 			CP.show(ContainerPanel.loginScreen);
 		
 		}}
+	
+//	Gets Events for one day - used in main menu screen
+	
 		
 //	Create Eventmenu button
 	private class Event implements ActionListener{
@@ -130,7 +133,48 @@ public class Logic {
 		}
 	}
 	
+//	Day view logic
+	private void setDayView()
+	{
+		String[][] dayDate = SM.daysevents(AdminKeeper);
+		int arrayCounter = dayDate[0].length;
+		int arrayChecker = 0;
+		int arrayCheckerPlus = 0;
+		for (int reset = 1; reset < 99; reset++) {
+//			System.out.println("Vi er inde i for-loop " + reset + ". gang");
+			// Sets every field in a Jtable equals nothing
+			CP.getMM().getDayTable().setValueAt(null, reset, 0);
+			CP.getMM().getDayTable().setValueAt(null, reset, 1);
+			CP.getMM().getDayTable().setValueAt(null, reset, 2);
+			CP.getMM().getDayTable().setValueAt(null, reset, 3);
+			CP.getMM().getDayTable().setValueAt(null, reset, 4);
+		}
 
+		System.out.println(dayDate[arrayCheckerPlus][17]);
+		while (arrayChecker < arrayCounter) {
+			try
+			{
+				if(!dayDate[0][arrayChecker].isEmpty())
+				{
+//				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
+				CP.getMM().getDayTable().setValueAt(dayDate[0][arrayChecker], arrayCheckerPlus, 0);
+				CP.getMM().getDayTable().setValueAt(dayDate[1][arrayChecker], arrayCheckerPlus, 1);
+				CP.getMM().getDayTable().setValueAt(dayDate[2][arrayChecker], arrayCheckerPlus, 2);
+				CP.getMM().getDayTable().setValueAt(dayDate[3][arrayChecker], arrayCheckerPlus, 3);
+				CP.getMM().getDayTable().setValueAt(dayDate[4][arrayChecker], arrayCheckerPlus, 4);
+				arrayChecker++;
+				arrayCheckerPlus++;
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Well... We Try again");
+				arrayChecker++;
+			}
+		}
+	}
+	
+//	Initializelist for listeners
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
 		CP.getMM().addActionListenerLogOff(new LogOff());
