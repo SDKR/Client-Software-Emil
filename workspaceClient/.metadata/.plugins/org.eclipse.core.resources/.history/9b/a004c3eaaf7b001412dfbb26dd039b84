@@ -1,0 +1,279 @@
+package GUILogic;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import connections.ServerManager;
+import GUI.ContainerPanel;
+import GUI.MainMenu;
+import connections.ServerManager;
+import GUI.CreateEvent;
+
+public class Logic {
+	ServerManager SM = new ServerManager();
+	private ContainerPanel CP;
+	private CreateEvent CE;
+	private WeeklyCalendar WC;
+	private CalendarFunctions CF;
+	
+	
+	private String EmailKeeper; /* skal måske bruges senere */
+	private String PassKeeper; /* skal måske bruges senere */
+	private int AdminKeeper; /* skal måske bruges senere */
+	private String UserKeeper;
+	private String UserIDKeeper;
+	
+	public Logic() throws SQLException {
+		CP = new ContainerPanel();
+		initializeListeners();
+	}
+	
+//	Starts GUI 
+	public void startList() {
+		CP.show(ContainerPanel.loginScreen);
+		CP.setVisible(true);
+	}
+	
+//	Login function and error message
+	private class login implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String emailInput = CP.getLI().getTextFieldEmail().getText();
+			String passwordInput = CP.getLI().getTextFieldPassword().getText();
+			if(SM.userChecker(emailInput, passwordInput).equals("1"))
+			{
+				setUserKeeper(emailInput);
+				System.out.println("Så langt så godt");
+				CP.show(ContainerPanel.mainMenu); 	/*Show main menu*/
+				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
+				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
+				setDayView();
+				setWeekView();
+				
+			}
+			else
+			{
+				JOptionPane.showMessageDialog (null, "You have entered an incorrect username or password", "Information", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+	
+//	LogOff button
+	private class LogOff implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.loginScreen);
+		
+		}}
+	
+//	Weekly Calendar Button
+	private class WeeklyCalendar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.WeeklyCalendar);
+			
+		}}
+		
+//	Calendar Functions Button
+	private class CalendarFunctions implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.CalendarFunctions);		
+		}}
+	
+//	Back button
+	private class Back implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.mainMenu);
+	} 
+		}
+		
+//	Create Eventmenu button
+	private class Event implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.createevent);
+			setComboDates();
+		}
+	}
+	
+//	Logic for the comboboxes in createEvent
+	public void setComboDates() {
+		for (int yCount = 2014; yCount < 2038; yCount++) {
+
+			CP.getCE().getStartYear().addItem(yCount);
+			CP.getCE().getEndYear().addItem(yCount);
+		}
+		for (int moCount = 1; moCount < 13; moCount++) {
+			CP.getCE().getStartMonth().addItem(moCount);
+			CP.getCE().getEndMonth().addItem(moCount);
+		}
+		for (int dCount = 1; dCount < 32; dCount++) {
+			CP.getCE().getStartDay().addItem(dCount);
+			CP.getCE().getEndDay().addItem(dCount);
+		}
+		for (int hCount = 1; hCount < 25; hCount++) {
+			CP.getCE().getStartHour().addItem(hCount);
+			CP.getCE().getEndhour().addItem(hCount);
+		}
+		for (int miCount = 1; miCount < 60; miCount++) {
+			CP.getCE().getStartMinute().addItem(miCount);
+			CP.getCE().getEndMinute().addItem(miCount);
+		}
+	}
+	
+//	Create event logic
+	private class createEvent implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+	
+			String eventName = CP.getCE().getNameField().getText();
+			String eventLocation = CP.getCE().getTxtChooseLocation().getText();
+			String eventInfo = CP.getCE().getInfoBox().getText();
+			String eventTypeCombo = CP.getCE().getTypeCombo().getSelectedItem()
+					.toString();
+			String startYear = CP.getCE().getStartYear().getSelectedItem()
+					.toString();
+			String startMonth = CP.getCE().getStartMonth().getSelectedItem()
+					.toString();
+			String startDay = CP.getCE().getStartDay().getSelectedItem()
+					.toString();
+			String startHour = CP.getCE().getStartHour().getSelectedItem()
+					.toString();
+			String startMinute = CP.getCE().getStartMinute().getSelectedItem()
+					.toString();
+			String endYear = CP.getCE().getEndYear().getSelectedItem()
+					.toString();
+			String endMonth = CP.getCE().getEndMonth().getSelectedItem()
+					.toString();
+			String endDay = CP.getCE().getEndDay().getSelectedItem().toString();
+			String endHour = CP.getCE().getEndhour().getSelectedItem()
+					.toString();
+			String endMinute = CP.getCE().getEndMinute().getSelectedItem()
+					.toString();
+			String Calendar = CP.getCE().getCalendarCombo().getSelectedItem()
+					.toString();
+			
+			String checkJson = SM.createEvent(eventName, eventLocation, eventInfo, eventTypeCombo, startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute, Calendar);
+			
+			JOptionPane.showMessageDialog(null, checkJson);
+		}
+	}
+	
+//	Day view logic
+	private void setDayView()
+	{
+		String[][] dayDate = SM.daysevents(UserKeeper);
+		int arrayCounter = dayDate[0].length;
+		int arrayChecker = 0;
+		int arrayCheckerPlus = 0;
+		for (int reset = 1; reset < 99; reset++) {
+//			System.out.println("Vi er inde i for-loop " + reset + ". gang");
+			// Sets every field in a Jtable equals nothing
+			CP.getMM().getDayTable().setValueAt(null, reset, 0);
+			CP.getMM().getDayTable().setValueAt(null, reset, 1);
+			CP.getMM().getDayTable().setValueAt(null, reset, 2);
+			CP.getMM().getDayTable().setValueAt(null, reset, 3);
+			CP.getMM().getDayTable().setValueAt(null, reset, 4);
+		}
+
+
+		while (arrayChecker < arrayCounter) {
+			try
+			{
+				if(!dayDate[0][arrayChecker].isEmpty())
+				{
+//				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
+				CP.getMM().getDayTable().setValueAt(dayDate[0][arrayChecker], arrayCheckerPlus, 0);
+				CP.getMM().getDayTable().setValueAt(dayDate[1][arrayChecker], arrayCheckerPlus, 1);
+				CP.getMM().getDayTable().setValueAt(dayDate[2][arrayChecker], arrayCheckerPlus, 2);
+				CP.getMM().getDayTable().setValueAt(dayDate[3][arrayChecker], arrayCheckerPlus, 3);
+				CP.getMM().getDayTable().setValueAt(dayDate[4][arrayChecker], arrayCheckerPlus, 4);
+				arrayChecker++;
+				arrayCheckerPlus++;
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Well... We Try again");
+				arrayChecker++;
+			}
+		}
+	}
+	
+	private void setWeekView()
+	{
+		String[][] weekDate = SM.getEventsFromUSerWeek(UserKeeper);
+		int arrayCounter = weekDate[0].length;
+		int arrayChecker = 0;
+		int arrayCheckerPlus = 0;
+		for (int reset = 1; reset < 99; reset++) {
+			System.out.println("Vi er inde i for-loop " + reset + ". gang");
+			// Sets every field in a Jtable equals nothing
+			CP.getWC().getWeekTable().setValueAt(null, reset, 0);
+			CP.getWC().getWeekTable().setValueAt(null, reset, 1);
+			CP.getWC().getWeekTable().setValueAt(null, reset, 2);
+			CP.getWC().getWeekTable().setValueAt(null, reset, 3);
+			CP.getWC().getWeekTable().setValueAt(null, reset, 4);
+		}
+
+		while (arrayChecker < arrayCounter) {
+			try
+			{
+				if(!weekDate[0][arrayChecker].isEmpty())
+				{
+				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
+				CP.getWC().getWeekTable().setValueAt(weekDate[0][arrayChecker], arrayCheckerPlus, 0);
+				CP.getWC().getWeekTable().setValueAt(weekDate[1][arrayChecker], arrayCheckerPlus, 1);
+				CP.getWC().getWeekTable().setValueAt(weekDate[2][arrayChecker], arrayCheckerPlus, 2);
+				CP.getWC().getWeekTable().setValueAt(weekDate[3][arrayChecker], arrayCheckerPlus, 3);
+				CP.getWC().getWeekTable().setValueAt(weekDate[4][arrayChecker], arrayCheckerPlus, 4);
+				arrayChecker++;
+				arrayCheckerPlus++;
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Well... We Try again");
+				arrayChecker++;
+			}
+		}
+	}
+	
+//	Initializelist for listeners
+	private void initializeListeners() {
+		CP.getLI().addActionListenerLoginScreen(new login());
+		CP.getMM().addActionListenerLogOff(new LogOff());
+		CP.getMM().addActionListenerCreateEvent(new Event());
+		CP.getCE().createEventListener(new createEvent());
+		CP.getMM().addActionListenerWeeklyCalendar(new WeeklyCalendar());
+		CP.getWC().addActionListenerbtnBack(new Back());
+		CP.getCE().backListener(new Back());
+		CP.getMM().addActionListenerCalendarFunctions(new CalendarFunctions());
+		
+	}
+
+	public int getAdminKeeper() {
+		return AdminKeeper;
+	}
+
+	public void setAdminKeeper(int adminKeeper) {
+		AdminKeeper = adminKeeper;
+	}
+
+	public String getUserKeeper() {
+		return UserKeeper;
+	}
+
+	public void setUserKeeper(String userKeeper) {
+		UserKeeper = userKeeper;
+	}
+
+	public String getUserIDKeeper() {
+		return UserIDKeeper;
+	}
+
+	public void setUserIDKeeper(String userIDKeeper) {
+		UserIDKeeper = userIDKeeper;
+	}
+
+	
+}
+

@@ -11,12 +11,7 @@ public class ContainerPanel extends JFrame {
 	public static final String mainMenu = "MainMenu";
 	public static final String createevent = "CreateEvent";
 	public static final String WeeklyCalendar = "WeeklyCalendar";
-//	public static final String eventView = "EventView";
-//	public static final String noteView = "NoteView";
-//	public static final String quoteAndWeather = "QuoteAndWeather";
-//	public static final String createEvent = "createEvent";
-//	public static final String UserCreation = "UserCreation";
-//	public static final String calendarList = "calendarList";
+	public static final String CalendarFunctions = "CalendarFunctions";
 	
 	private static JPanel contentPane;
 	CardLayout c;
@@ -25,12 +20,8 @@ public class ContainerPanel extends JFrame {
 	private CreateEvent CE;
 	private WeeklyCalendar WC;
 	private MainMenu MM;
-//	private NoteList NL;
-//	private UserList UL;
-//	private QuoteAndWeather QAW;
-//	private AddEvent AE;
-//	private UserCreation UC;
-//	private CalendarList CL;
+	private CalendarFunctions CF;
+
 	
 	public ContainerPanel() throws SQLException
 	{
@@ -57,36 +48,12 @@ public class ContainerPanel extends JFrame {
 		WC = new WeeklyCalendar();
 		contentPane.add(WC, WeeklyCalendar);
 		
+		CF = new CalendarFunctions();
+		contentPane.add(CF, CalendarFunctions);
+		
 		
 	}
 		
-//		AE = new AddEvent();
-//		contentPane.add(AE, createEvent);
-//		
-//		eList = new EventList();
-//		contentPane.add(eList, eventView);
-//
-		
-//		NL = new NoteList();
-//		contentPane.add(NL, noteView);
-//		
-//		UL = new UserList();
-//		contentPane.add(UL, userView);
-//		
-//		QAW = new QuoteAndWeather();
-//		contentPane.add(QAW, quoteAndWeather);
-//		
-//		UC = new UserCreation();
-//		contentPane.add(UC, UserCreation);
-//		
-//		CL = new CalendarList();
-//		contentPane.add(CL, calendarList);
-//	}
-//
-//	public EventList geteList() {
-//		return eList;
-//	}
-//
 	public MainMenu getMM() {
 		return MM;
 	}
@@ -98,28 +65,15 @@ public class ContainerPanel extends JFrame {
 	public WeeklyCalendar getWC() {
 		return WC;
 	}
-//	
-//	public CalendarList getCL() {
-//		return CL;
-//	}
-//
-//	public UserList getUI() {
-//		return UL;
-//	}
+	
+	public CalendarFunctions getCF() {
+		return CF;
+	}
 	
 	public Login getLI() {
 		return LI;
 	}
-//	public QuoteAndWeather getQAW(){
-//		return QAW;
-//	}
-//	public AddEvent getAE() {
-//		return AE;
-//	}
-//
-//	public UserCreation getUC(){
-//		return UC;
-//	}
+
 	public void show(String card){
 		c.show(getContentPane(), card);
 	}

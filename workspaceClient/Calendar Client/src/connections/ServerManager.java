@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import json.AuthUserJson;
+import json.CreateCalendarJson;
 import json.CreateEventJson;
+import json.DeleteCalendarJson;
 import json.EventsDayJson;
+import json.EventsWeekJson;
 import json.QOTDJson;
 import json.WeatherJson;
+import json.userToCalendar;
 import TCPSocket.TCPConnect;
 
 public class ServerManager {
@@ -122,7 +126,6 @@ public class ServerManager {
 		try
 		{ 
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
-			System.out.println(stringArrayToBeReturned[2][4]);
 		}
 		catch(Exception e)
 		{
@@ -139,13 +142,65 @@ public class ServerManager {
 		try
 		{ 
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
-			System.out.println(stringArrayToBeReturned[2][4]);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		return stringArrayToBeReturned;
+	}
+	
+//	Calendar
+	public String useToCalendar(String username, String Calendarname)
+	{
+		String stringToBeReturned = "";
+		userToCalendar UTC = new userToCalendar();
+		UTC.setCalendarName(Calendarname);
+		UTC.setEmail(username);
+		String gsonString = gson.toJson(UTC);
+		try
+		{
+			stringToBeReturned = TCon.sendMessage(gsonString);
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return stringToBeReturned;
+	}
+
+//	Delte calendar 
+	public void deleteCalendar(String calendarName, String allKnowingUsername) {
+		String stringToBeReturned = "";
+		DeleteCalendarJson DCJ = new DeleteCalendarJson();
+		DCJ.setCalenderName(calendarName);
+		DCJ.setUserName(allKnowingUsername);
+		String gsonString = gson.toJson(DCJ);
+		try
+		{
+			stringToBeReturned = TCon.sendMessage(gsonString);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+//	create calendar
+	public void createCalendar(String calendarName, int pP, String allKnowingUsername) {
+		String stringToBeReturned ="";
+		CreateCalendarJson CCJ = new CreateCalendarJson();
+		CCJ.setCalenderName(calendarName);
+		CCJ.setPublicOrPrivate(pP);
+		CCJ.setUserName(allKnowingUsername);
+		String gsonString = gson.toJson(CCJ);
+		try
+		{
+			stringToBeReturned = TCon.sendMessage(gsonString);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

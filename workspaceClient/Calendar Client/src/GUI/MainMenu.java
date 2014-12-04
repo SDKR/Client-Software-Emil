@@ -15,11 +15,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MainMenu extends JPanel {
-	private JButton btnFCalendar = new JButton("Full Calendar");
+	private JButton btnFCalendar = new JButton("Your Week");
 	private JButton btnCreateEvent = new JButton("Create Calendar and Event");
 	private JButton btnCreateNote = new JButton("Create Note");
 	private JButton btnLogOff = new JButton("LogOff");
-	private JButton button_2 = new JButton("New button");
+	private JButton btnCalendarFunctions = new JButton("Calendar Functions");
 	private JTextField weatherbox = new JTextField();
 	private JTextField QOTDtxt = new JTextField();
 	private final JTable dayTable = new JTable();
@@ -156,7 +156,7 @@ public class MainMenu extends JPanel {
 			lblMenu.setBounds(1100, 78, 62, 25);
 			add(lblMenu);
 			
-//			View entire calendar			
+//			View entire calendar (Your week)			
 			btnFCalendar.setBounds(1006, 117, 250, 75);
 			add(btnFCalendar);
 			
@@ -168,9 +168,9 @@ public class MainMenu extends JPanel {
 			btnCreateNote.setBounds(1006, 289, 250, 75);
 			add(btnCreateNote);
 			
-//			Ekstra knap lige nu 
-			button_2.setBounds(1006, 375, 250, 75);
-			add(button_2);
+//			Calendar functions
+			btnCalendarFunctions.setBounds(1006, 375, 250, 75);
+			add(btnCalendarFunctions);
 			
 //			Log Off
 			btnLogOff.setBounds(1006, 461, 250, 75);
@@ -207,6 +207,14 @@ public class MainMenu extends JPanel {
 			btnCreateEvent.addActionListener(l);
 		}
 		
+		public void addActionListenerWeeklyCalendar(ActionListener l){
+			btnFCalendar.addActionListener(l);
+		}
+		
+		public void addActionListenerCalendarFunctions(ActionListener l){
+			btnCalendarFunctions.addActionListener(l);
+		}
+		
 		
 //		Getters and setters
 		public JTextField getWeatherbox() {
@@ -236,8 +244,8 @@ public class MainMenu extends JPanel {
 		}
 
 
-		public JButton getButton_2() {
-			return button_2;
+		public JButton getCalendarFunctions() {
+			return btnCalendarFunctions;
 		}
 
 		public JTextField getQOTDtxt() {

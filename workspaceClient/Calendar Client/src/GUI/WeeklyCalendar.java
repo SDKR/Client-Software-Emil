@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Dimension;
 import java.awt.ScrollPane;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -21,12 +22,12 @@ public class WeeklyCalendar extends JPanel {
 		setLayout(null);
 		
 //	Back button
-		btnBack.setBounds(558, 726, 250, 40);
+		btnBack.setBounds(1106, 695, 250, 40);
 		add(btnBack);
 		
 //	Week calendar view
 		
-		scrollPane_1.setBounds(50, 66, 1266, 630);
+		scrollPane_1.setBounds(49, 35, 1251, 630);
 		
 		add(scrollPane_1);
 		weekTable.setModel(new DefaultTableModel(
@@ -139,8 +140,13 @@ public class WeeklyCalendar extends JPanel {
 		
 		scrollPane_1.setViewportView(weekTable);
 		
-		
+
 	}
+	
+//	Action listeners
+	public void addActionListenerbtnBack(ActionListener l){
+		btnBack.addActionListener(l);
+}
 
 	public JButton getBtnBack() {
 		return btnBack;

@@ -16,10 +16,12 @@ public class Logic {
 	ServerManager SM = new ServerManager();
 	private ContainerPanel CP;
 	private CreateEvent CE;
+	private WeeklyCalendar WC;
+	private CalendarFunctions CF;
 	
 	
-	private String EmailKeeper;
-	private String PassKeeper;
+	private String EmailKeeper; /* skal måske bruges senere */
+	private String PassKeeper; /* skal måske bruges senere */
 	private int AdminKeeper; /* skal måske bruges senere */
 	private String UserKeeper;
 	private String UserIDKeeper;
@@ -42,10 +44,13 @@ public class Logic {
 			String passwordInput = CP.getLI().getTextFieldPassword().getText();
 			if(SM.userChecker(emailInput, passwordInput).equals("1"))
 			{
+				setUserKeeper(emailInput);
 				System.out.println("Så langt så godt");
 				CP.show(ContainerPanel.mainMenu); 	/*Show main menu*/
 				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
 				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
+				setDayView();
+				setWeekView();
 				
 			}
 			else
@@ -62,8 +67,25 @@ public class Logic {
 		
 		}}
 	
-//	Gets Events for one day - used in main menu screen
+//	Weekly Calendar Button
+	private class WeeklyCalendar implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.WeeklyCalendar);
+			
+		}}
+		
+//	Calendar Functions Button
+	private class CalendarFunctions implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.CalendarFunctions);		
+		}}
 	
+//	Back button
+	private class Back implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.mainMenu);
+	} 
+		}
 		
 //	Create Eventmenu button
 	private class Event implements ActionListener{
@@ -135,6 +157,51 @@ public class Logic {
 		}
 	}
 	
+//	Subscribe to calendar function
+	private class subscribeToCalendar implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String calendarName = CP.getCF().getSubscribeField().getText();
+			SM.useToCalendar(UserKeeper, calendarName);
+		}
+	}
+//	Create calendar function
+	private class createCalendars implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String calendarName = CP.getCF().getCreateField().getText();
+			String comboText = CP.getCF().getCreateCombo().getSelectedItem().toString();
+			int PP = 0;
+			System.out.println(comboText);
+			if(comboText.equals("Private"))
+			{
+				PP = 2;
+			}
+			else
+			{
+				PP = 1;
+			}
+			System.out.println(PP);
+			SM.createCalendar(calendarName, PP, UserKeeper);
+		}
+	}
+//	Delete calendar function
+	private class deleteCalendar implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String calendarName = CP.getCF().getDeleteField().getText();
+			if(!calendarName.equals(""))
+			{
+				SM.deleteCalendar(calendarName, UserKeeper);
+			}
+			else
+			{
+				CP.getCF().getDeleteField().setText("");
+				JOptionPane.showMessageDialog (null, "You have to enter the name of a calendar to delete", "Information", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+	
 //	Day view logic
 	private void setDayView()
 	{
@@ -152,7 +219,7 @@ public class Logic {
 			CP.getMM().getDayTable().setValueAt(null, reset, 4);
 		}
 
-		System.out.println(dayDate[arrayCheckerPlus][17]);
+
 		while (arrayChecker < arrayCounter) {
 			try
 			{
@@ -192,7 +259,6 @@ public class Logic {
 			CP.getWC().getWeekTable().setValueAt(null, reset, 4);
 		}
 
-		System.out.println(weekDate[arrayCheckerPlus][17]);
 		while (arrayChecker < arrayCounter) {
 			try
 			{
@@ -214,6 +280,7 @@ public class Logic {
 				arrayChecker++;
 			}
 		}
+		
 	}
 	
 //	Initializelist for listeners
@@ -222,6 +289,14 @@ public class Logic {
 		CP.getMM().addActionListenerLogOff(new LogOff());
 		CP.getMM().addActionListenerCreateEvent(new Event());
 		CP.getCE().createEventListener(new createEvent());
+		CP.getMM().addActionListenerWeeklyCalendar(new WeeklyCalendar());
+		CP.getWC().addActionListenerbtnBack(new Back());
+		CP.getCE().backListener(new Back());
+		CP.getMM().addActionListenerCalendarFunctions(new CalendarFunctions());
+		CP.getCF().goToMainMenu(new Back());
+		CP.getCF().deleteCalendarListener(new deleteCalendar());
+		CP.getCF().subscribeListener(new subscribeToCalendar());
+		CP.getCF().createCalendarListener(new createCalendars());
 		
 	}
 
