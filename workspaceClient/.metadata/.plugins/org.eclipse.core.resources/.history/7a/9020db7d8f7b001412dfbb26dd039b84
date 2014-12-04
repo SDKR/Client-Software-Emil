@@ -176,46 +176,6 @@ public class Logic {
 		}
 	}
 	
-	private void setWeekView()
-	{
-		String[][] weekDate = SM.getEventsFromUSerWeek(UserKeeper);
-		int arrayCounter = weekDate[0].length;
-		int arrayChecker = 0;
-		int arrayCheckerPlus = 0;
-		for (int reset = 1; reset < 99; reset++) {
-			System.out.println("Vi er inde i for-loop " + reset + ". gang");
-			// Sets every field in a Jtable equals nothing
-			CP.getWC().getWeekTable().setValueAt(null, reset, 0);
-			CP.getWC().getWeekTable().setValueAt(null, reset, 1);
-			CP.getWC().getWeekTable().setValueAt(null, reset, 2);
-			CP.getWC().getWeekTable().setValueAt(null, reset, 3);
-			CP.getWC().getWeekTable().setValueAt(null, reset, 4);
-		}
-
-		System.out.println(weekDate[arrayCheckerPlus][17]);
-		while (arrayChecker < arrayCounter) {
-			try
-			{
-				if(!weekDate[0][arrayChecker].isEmpty())
-				{
-				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
-				CP.getWC().getWeekTable().setValueAt(weekDate[0][arrayChecker], arrayCheckerPlus, 0);
-				CP.getWC().getWeekTable().setValueAt(weekDate[1][arrayChecker], arrayCheckerPlus, 1);
-				CP.getWC().getWeekTable().setValueAt(weekDate[2][arrayChecker], arrayCheckerPlus, 2);
-				CP.getWC().getWeekTable().setValueAt(weekDate[3][arrayChecker], arrayCheckerPlus, 3);
-				CP.getWC().getWeekTable().setValueAt(weekDate[4][arrayChecker], arrayCheckerPlus, 4);
-				arrayChecker++;
-				arrayCheckerPlus++;
-				}
-			}
-			catch(Exception e)
-			{
-				System.out.println("Well... We Try again");
-				arrayChecker++;
-			}
-		}
-	}
-	
 //	Initializelist for listeners
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
@@ -223,30 +183,6 @@ public class Logic {
 		CP.getMM().addActionListenerCreateEvent(new Event());
 		CP.getCE().createEventListener(new createEvent());
 		
-	}
-
-	public int getAdminKeeper() {
-		return AdminKeeper;
-	}
-
-	public void setAdminKeeper(int adminKeeper) {
-		AdminKeeper = adminKeeper;
-	}
-
-	public String getUserKeeper() {
-		return UserKeeper;
-	}
-
-	public void setUserKeeper(String userKeeper) {
-		UserKeeper = userKeeper;
-	}
-
-	public String getUserIDKeeper() {
-		return UserIDKeeper;
-	}
-
-	public void setUserIDKeeper(String userIDKeeper) {
-		UserIDKeeper = userIDKeeper;
 	}
 
 	

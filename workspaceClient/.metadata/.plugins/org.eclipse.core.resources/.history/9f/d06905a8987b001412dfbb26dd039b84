@@ -131,21 +131,5 @@ public class ServerManager {
 		return stringArrayToBeReturned;
 	}
 	
-	public String[][] getEventsFromUSerWeek(String UserKeeper) {
-		String[][] stringArrayToBeReturned = null;
-		EventsWeekJson EWJ = new EventsWeekJson();
-		EWJ.setCreatedby(UserKeeper);
-		String gsonString = gson.toJson(EWJ);
-		try
-		{ 
-			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
-			System.out.println(stringArrayToBeReturned[2][4]);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return stringArrayToBeReturned;
-	}
 	
 }

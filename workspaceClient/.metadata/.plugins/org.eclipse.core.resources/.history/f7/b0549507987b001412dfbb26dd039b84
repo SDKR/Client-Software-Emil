@@ -251,6 +251,4 @@ public class MainMenu extends JPanel {
 		public JTable getDayTable() {
 			return dayTable;
 		}
-		
-		
 }

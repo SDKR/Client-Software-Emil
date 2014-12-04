@@ -10,7 +10,7 @@ public class ContainerPanel extends JFrame {
 	public static final String loginScreen = "LoginScreen";
 	public static final String mainMenu = "MainMenu";
 	public static final String createevent = "CreateEvent";
-	public static final String WeeklyCalendar = "WeeklyCalendar";
+//	public static final String userView = "UserView";
 //	public static final String eventView = "EventView";
 //	public static final String noteView = "NoteView";
 //	public static final String quoteAndWeather = "QuoteAndWeather";
@@ -23,7 +23,7 @@ public class ContainerPanel extends JFrame {
 	
 	private Login LI;
 	private CreateEvent CE;
-	private WeeklyCalendar WC;
+//	private EventList eList;
 	private MainMenu MM;
 //	private NoteList NL;
 //	private UserList UL;
@@ -53,9 +53,6 @@ public class ContainerPanel extends JFrame {
 		
 		CE = new CreateEvent();
 		contentPane.add(CE, createevent);
-		
-		WC = new WeeklyCalendar();
-		contentPane.add(WC, WeeklyCalendar);
 		
 		
 	}
@@ -95,9 +92,9 @@ public class ContainerPanel extends JFrame {
 		return CE;
 	}
 
-	public WeeklyCalendar getWC() {
-		return WC;
-	}
+//	public NoteList getNL() {
+//		return NL;
+//	}
 //	
 //	public CalendarList getCL() {
 //		return CL;

@@ -33,7 +33,7 @@ public class MainMenu extends JPanel {
 			
 //			Panel for daily activities
 			
-			scrollPane.setBounds(10, 117, 801, 591);
+			scrollPane.setBounds(12, 147, 801, 591);
 			add(scrollPane);
 			dayTable.setModel(new DefaultTableModel(
 				new Object[][] {
@@ -251,6 +251,4 @@ public class MainMenu extends JPanel {
 		public JTable getDayTable() {
 			return dayTable;
 		}
-		
-		
 }
