@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import json.QOTDJson;
 import connections.ServerManager;
 import GUI.ContainerPanel;
 import GUI.MainMenu;
@@ -18,6 +19,7 @@ public class Logic {
 	private CreateEvent CE;
 	private WeeklyCalendar WC;
 	private CalendarFunctions CF;
+
 	
 	
 	private String EmailKeeper; /* skal måske bruges senere */
@@ -49,9 +51,11 @@ public class Logic {
 				setUserKeeper(emailInput);
 				System.out.println("Så langt så godt");
 				CP.show(ContainerPanel.mainMenu); 	/*Show main menu*/
-				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
-				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
+//				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
+//				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
 				setDayView(); /*Gets todays calendar info for the main menu*/
+				quoteFormat();
+				weatherFormat();
 				
 			}
 			else
@@ -99,6 +103,73 @@ public class Logic {
 	}
 	
 //	Supporting GUI Logic 
+	
+//	Divides the quote up into parts if it is too damn long
+	private void quoteFormat()
+	{
+		SM.quoteCheck();
+		String quoteBody = SM.getQuoteOutput();
+		int quoteLength = quoteBody.length();
+		System.out.println(quoteLength);
+		CP.getMM().getLblQotdtxt().setText(SM.getQouteAuthor());
+		//
+		if(quoteLength>42) /*If the qoute is longer than 42 characters*/
+		{
+			CharSequence firstHalf = quoteBody.subSequence(0, 42)+"-";
+			CharSequence secondHalf = quoteBody.subSequence(42, quoteLength);
+
+			String partOne = firstHalf.toString();
+			String partTwo = secondHalf.toString();
+//			String partThree = thirdHalf.toString();
+			
+			CP.getMM().getLblQotdtxt_1().setText(partOne);
+			CP.getMM().getLblQotdtxt_2().setText(partTwo);
+//			CP.getMM().getLblQotdtxt_3().setText(partThree);
+		}
+		else if (quoteLength>84) /*If the qoute is longer than 84 characters*/
+		{
+			CharSequence firstHalf = quoteBody.subSequence(0, 42)+"-";
+			CharSequence secondHalf = quoteBody.subSequence(42, 84)+"-";
+			CharSequence thirdHalf = quoteBody.subSequence(84, quoteLength);
+			String partOne = firstHalf.toString();
+			String partTwo = secondHalf.toString();
+			String partThree = thirdHalf.toString();
+			
+			CP.getMM().getLblQotdtxt_1().setText(partOne);
+			CP.getMM().getLblQotdtxt_2().setText(partTwo);
+			CP.getMM().getLblQotdtxt_3().setText(partThree);
+		}
+		
+		else /*If the qoute is shorter than 42 characters*/
+		{
+			CP.getMM().getLblQotdtxt_1().setText(quoteBody);
+		}
+	}
+	
+//	Weather function formatting 
+	private void weatherFormat()
+	{
+		SM.weatherCheck();
+		
+		String weatherDeg = SM.getWeatherDegrees();
+		String weatherDec = SM.getWeatherDecription();
+		String weatherDate = SM.getWeatherDate();
+		
+		
+		System.out.println(weatherDate);
+		
+//		Format Date
+		CharSequence weathDate = weatherDate.subSequence(0, 10);
+		String wDate = weathDate.toString();
+		
+//		Format description to uppercase
+		String wDesc = weatherDec.substring(0, 1).toUpperCase() + weatherDec.substring(1);
+		
+		CP.getMM().getLblweatherDeg().setText(weatherDeg);
+		CP.getMM().getLblweatherDesc().setText(wDesc);
+		CP.getMM().getLblweatherDate().setText(wDate);
+	}
+	
 	
 //	Logic for the comboboxes in createEvent
 	public void setComboDates() {

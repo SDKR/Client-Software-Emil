@@ -20,6 +20,15 @@ public class ServerManager {
 	TCPConnect TCon = new TCPConnect();
 	Gson gson = new GsonBuilder().create();
 	
+//	Quote function
+	String quoteOutput;
+	String qouteAuthor;
+
+//	Weather function
+	String weatherDegrees;
+	String weatherDecription;
+	String weatherDate;
+	
 //	Login Function
 	public String userChecker(String email, String password){
 		String userChecker = "";
@@ -40,8 +49,8 @@ public class ServerManager {
 
 	}
 	
-//	Weather function
-	public String weatherCheck(){
+//	Weather function, degrees, decription, date and getters 
+	public void weatherCheck(){
 	String currentWeather = "";
 	Gson gson = new GsonBuilder().create();
 	WeatherJson WJ = new WeatherJson();
@@ -54,15 +63,28 @@ public class ServerManager {
 	}
 	
 	WeatherJson WJ1 = gson.fromJson(currentWeather, WeatherJson.class);
+//	String weatherOutput = WJ1.getDegrees() +" "+ WJ1.getDesc() +" "+ WJ1.getWeather();
 
-	String weatherOutput = WJ1.getDegrees() +" "+ WJ1.getDesc() +" "+ WJ1.getWeather();
-
-	return weatherOutput;
+	weatherDegrees = WJ1.getDegrees();
+	weatherDecription = WJ1.getDesc();
+	weatherDate = WJ1.getWeather();
 	
 }
-	
-//	Quote function
-	public String quoteCheck(){
+//	getters
+public String getWeatherDegrees() {
+		return weatherDegrees;
+	}
+
+	public String getWeatherDecription() {
+		return weatherDecription;
+	}
+
+	public String getWeatherDate() {
+		return weatherDate;
+	}
+
+	//	Quote function
+	public void quoteCheck(){
 		String currentQuote = "";
 		Gson gson = new GsonBuilder().create();
 		QOTDJson QJ = new QOTDJson();
@@ -76,12 +98,20 @@ public class ServerManager {
 		System.out.println(currentQuote);
 		QOTDJson QJ1 = gson.fromJson(currentQuote, QOTDJson.class);
 		
-		String quoteOutput = QJ1.getAuthor() + " " + QJ1.getQuote();
- 		
+		quoteOutput = QJ1.getQuote();
+		qouteAuthor = QJ1.getAuthor();
+
+	}
+//	getters for the author and quote itself
+	public String getQuoteOutput() {
 		return quoteOutput;
 	}
-	
-//	CreateEvent
+
+	public String getQouteAuthor() {
+		return qouteAuthor;
+	}
+
+	//	CreateEvent
 	public String createEvent(String eventName, String eventLocation, String eventInfo, String eventTypeCombo, String startYear, String startMonth, String startDay, String startHour, String startMinute, String endYear, String endMonth, String endDay, String endHour, String endMinute, String Calendar){
 		String stringToBeReturned = "";
 		CreateEventJson EJ1 = new CreateEventJson();
