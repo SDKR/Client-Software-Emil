@@ -26,7 +26,6 @@ import java.awt.Dimension;
 
 import javax.swing.JTextPane;
 
-//Initialize buttons, textfields, and so on.
 	public class Login extends JPanel {
 		JLabel lblJegErLogin = new JLabel("Login here:\r\n");
 		JLabel lblWelcomeToThe = new JLabel("Welcome to your calendar");
@@ -84,12 +83,10 @@ import javax.swing.JTextPane;
 			
 		}
 		
-//		Action listener
 		public void addActionListenerLoginScreen(ActionListener l){
 			btnLogin.addActionListener(l);
 		}
 
-//		Getters
 		public JButton getBtnLogIn() {
 			return btnLogin;
 		}

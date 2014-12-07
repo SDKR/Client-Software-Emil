@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class WeeklyCalendar extends JPanel {
 	
-//	Initialize buttons, textfields, and so on.
 	private JButton btnBack = new JButton("Back");
 	private JTable weekTable = new JTable();
 	private final JScrollPane scrollPane_1 = new JScrollPane();
@@ -22,7 +21,6 @@ public class WeeklyCalendar extends JPanel {
 	
 	public WeeklyCalendar() {
 		
-//	Set size
 		setPreferredSize(new Dimension(1366,768));
 		setLayout(null);
 		
@@ -145,7 +143,6 @@ public class WeeklyCalendar extends JPanel {
 		
 		scrollPane_1.setViewportView(weekTable);
 		
-//		Sets background image to blue standard design
 		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
 		background.setBounds(0, 0, 1366, 768);
 		add(background);
@@ -154,12 +151,11 @@ public class WeeklyCalendar extends JPanel {
 	
 	
 	
-//	Action listener
+//	Action listeners
 	public void addActionListenerbtnBack(ActionListener l){
 		btnBack.addActionListener(l);
 }
 
-//	Getters
 	public JButton getBtnBack() {
 		return btnBack;
 	}

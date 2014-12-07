@@ -14,8 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class CalendarFunctions extends JPanel {
-	
-//	Initialize buttons, textfields, and so on.
 	private JTable calendarTable = new JTable();
 	private JTextField subscribeField = new JTextField();
 	private JButton btnSubscribe = new JButton("Subscribe");
@@ -42,12 +40,9 @@ public class CalendarFunctions extends JPanel {
 		/*
 		 * Buttons
 		 */
-		
-//	Main menu button
 		btnMainMenu.setBounds(1129, 9, 225, 70);
 		add(btnMainMenu);
 		
-//	JScrollPane followed by the Jtable holding all the calendar data.
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 13, 419, 742);
 		add(scrollPane);
@@ -162,7 +157,6 @@ public class CalendarFunctions extends JPanel {
 		));
 		scrollPane.setViewportView(calendarTable);
 		
-//	Information labels
 		JLabel lblSubscribeToCalendar = new JLabel("Subscribe to calendar");
 		lblSubscribeToCalendar.setBounds(667, 13, 124, 16);
 		add(lblSubscribeToCalendar);
@@ -171,16 +165,13 @@ public class CalendarFunctions extends JPanel {
 		lblCalendarName.setBounds(667, 36, 97, 16);
 		add(lblCalendarName);
 		
-//	Subscribe input field
 		subscribeField.setBounds(776, 33, 116, 22);
 		add(subscribeField);
 		subscribeField.setColumns(10);
 		
-//	Subscribe button 
 		btnSubscribe.setBounds(667, 65, 97, 25);
 		add(btnSubscribe);
 		
-//	Information labels
 		JLabel lblCreateNewCalender = new JLabel("Create New Calender");
 		lblCreateNewCalender.setBounds(667, 167, 122, 16);
 		add(lblCreateNewCalender);
@@ -189,22 +180,18 @@ public class CalendarFunctions extends JPanel {
 		lblNewLabel.setBounds(667, 210, 93, 16);
 		add(lblNewLabel);
 
-//	Create calendar field
 		createField.setBounds(796, 207, 116, 22);
 		add(createField);
 		createField.setColumns(10);
 		
-//	Information label
 		JLabel lblPublicOrPrivate = new JLabel("Public or Private");
 		lblPublicOrPrivate.setBounds(936, 210, 92, 16);
 		add(lblPublicOrPrivate);
 		
-//	Combobox for public or private calendar
 		createCombo.setModel(new DefaultComboBoxModel(new String[] {"Public", "Private"}));
 		createCombo.setBounds(1040, 207, 79, 22);
 		add(createCombo);
 		
-//	Informaion Labels
 		JLabel lblDeleteCalendar = new JLabel("Delete Calendar");
 		lblDeleteCalendar.setBounds(667, 317, 91, 16);
 		add(lblDeleteCalendar);
@@ -213,20 +200,16 @@ public class CalendarFunctions extends JPanel {
 		lblCalendarName_1.setBounds(667, 346, 93, 16);
 		add(lblCalendarName_1);
 		
-//	Delte field input 
 		deleteField.setBounds(796, 343, 116, 22);
 		add(deleteField);
 		deleteField.setColumns(10);	
 		
-//	Create calendar btn
 		btnCreateCalendar.setBounds(667, 250, 125, 25);
 		add(btnCreateCalendar);	
 		
-//	Delete calendar button
 		btnDeleteCalendar.setBounds(667, 388, 123, 25);
 		add(btnDeleteCalendar);
 		
-//	Information labels
 		JLabel lblUnsubscribeCalendar = new JLabel("Unsubscribe calendar");
 		lblUnsubscribeCalendar.setBounds(902, 13, 124, 16);
 		add(lblUnsubscribeCalendar);
@@ -235,16 +218,14 @@ public class CalendarFunctions extends JPanel {
 		label_1.setBounds(902, 36, 97, 16);
 		add(label_1);
 		
-//		Unsubscribe input fields 
+//		Unsub
 		unSubtextField.setColumns(10);
 		unSubtextField.setBounds(1011, 33, 116, 22);
 		add(unSubtextField);
 		
-//	Unsubscribe button
 		btnUnsubscribe.setBounds(902, 65, 97, 25);
 		add(btnUnsubscribe);
 		
-//	Information labels	
 		JLabel lblSubscribeUsersTo = new JLabel("Subscribe users to yor Calendar");
 		lblSubscribeUsersTo.setBounds(667, 447, 183, 16);
 		add(lblSubscribeUsersTo);
@@ -257,29 +238,24 @@ public class CalendarFunctions extends JPanel {
 		lblUsername.setBounds(874, 482, 67, 16);
 		add(lblUsername);
 		
-//	Subscribe til calendar input field 
 		calendarField = new JTextField();
 		calendarField.setBounds(734, 479, 116, 22);
 		add(calendarField);
 		calendarField.setColumns(10);
 		
-//	User to subscribe
 		usernameField = new JTextField();
 		usernameField.setBounds(953, 479, 116, 22);
 		add(usernameField);
 		usernameField.setColumns(10);
 		
-//	Button to add another user to calendar
 		btnAddUser.setBounds(667, 511, 97, 25);
 		add(btnAddUser);
 		
-//	Sets background image to blue standard design
 		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
 		background.setBounds(0, 0, 1366, 768);
 		add(background);
 	}
 
-//	Getters and setters
 	public JButton getBtnUnsubscribe() {
 		return btnUnsubscribe;
 	}
@@ -331,7 +307,6 @@ public class CalendarFunctions extends JPanel {
 		return usernameField;
 	}
 	
-//	Action listeners for buttons
 	public void subscribeListener(ActionListener l)
 	{
 		btnSubscribe.addActionListener(l);

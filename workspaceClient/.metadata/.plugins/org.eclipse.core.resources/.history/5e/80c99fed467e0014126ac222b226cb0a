@@ -69,13 +69,12 @@ public class ServerManager {
 	WeatherJson WJ1 = gson.fromJson(currentWeather, WeatherJson.class);
 //	String weatherOutput = WJ1.getDegrees() +" "+ WJ1.getDesc() +" "+ WJ1.getWeather();
 
-//	Set weather information to:
 	weatherDegrees = WJ1.getDegrees();
 	weatherDecription = WJ1.getDesc();
 	weatherDate = WJ1.getWeather();
 	
 }
-//	getters for weather information
+//	getters
 public String getWeatherDegrees() {
 		return weatherDegrees;
 	}
@@ -103,7 +102,6 @@ public String getWeatherDegrees() {
 		System.out.println(currentQuote);
 		QOTDJson QJ1 = gson.fromJson(currentQuote, QOTDJson.class);
 		
-//		Set server quote output to:
 		quoteOutput = QJ1.getQuote();
 		qouteAuthor = QJ1.getAuthor();
 
@@ -137,12 +135,11 @@ public String getWeatherDegrees() {
 		EJ1.setEndMinute(endMinute);
 		EJ1.setCalendarID(Calendar);
 		
-//		Takes all the variables from user and converts to Json
+		
 		Gson gson = new GsonBuilder().create();
 		String gsonString = gson.toJson(EJ1);
 		
 		try{
-//		Tries to send the information via TCPConnect class
 			stringToBeReturned = TCon.sendMessage(gsonString);
 		}
 		catch (Exception e){
@@ -160,12 +157,9 @@ public String getWeatherDegrees() {
 		String[][] stringArrayToBeReturned = null;
 		EventsDayJson EDJ = new EventsDayJson();
 		EDJ.setCreatedby(AdminKeeper);
-		
-//		Takes all the variables from user and converts to Json
 		String gsonString = gson.toJson(EDJ);
 		try
 		{ 
-//		Tries to send the information via TCPConnect class
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
 		}
 		catch(Exception e)
@@ -175,17 +169,13 @@ public String getWeatherDegrees() {
 		return stringArrayToBeReturned;
 	}
 	
-//	Get weekly events
 	public String[][] getEventsFromUSerWeek(String UserKeeper) {
 		String[][] stringArrayToBeReturned = null;
 		EventsWeekJson EWJ = new EventsWeekJson();
 		EWJ.setCreatedby(UserKeeper);
-		
-//		Takes all the variables from user and converts to Json
 		String gsonString = gson.toJson(EWJ);
 		try
 		{ 
-//		Tries to send the information via TCPConnect class
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
 		}
 		catch(Exception e)
@@ -195,19 +185,16 @@ public String getWeatherDegrees() {
 		return stringArrayToBeReturned;
 	}
 	
-//	Add user to calendar
+//	Calendar
 	public String useToCalendar(String username, String Calendarname)
 	{
 		String stringToBeReturned = "";
 		userToCalendar UTC = new userToCalendar();
 		UTC.setCalendarName(Calendarname);
 		UTC.setEmail(username);
-	
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(UTC);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringToBeReturned = TCon.sendMessage(gsonString);
 		} catch(Exception e)
 		{
@@ -216,19 +203,16 @@ public String getWeatherDegrees() {
 		return stringToBeReturned;
 	}
 	
-//		Unsubscribe user from calendar 
+//	Calendar
 	public String UnSubScribeCalendar(String username, String Calendarname)
 	{
 		String stringToBeReturned = "";
 		UnSubscribeCalendarJson USC = new UnSubscribeCalendarJson();
 		USC.setCalendarName(username);
 		USC.setEmail(Calendarname);
-		
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(USC);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringToBeReturned = TCon.sendMessage(gsonString);
 		} catch(Exception e)
 		{
@@ -243,12 +227,9 @@ public String getWeatherDegrees() {
 		DeleteCalendarJson DCJ = new DeleteCalendarJson();
 		DCJ.setCalenderName(calendarName);
 		DCJ.setUserName(allKnowingUsername);
-		
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(DCJ);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringToBeReturned = TCon.sendMessage(gsonString);
 		}
 		catch(Exception e)
@@ -264,12 +245,9 @@ public String getWeatherDegrees() {
 		CCJ.setCalenderName(calendarName);
 		CCJ.setPublicOrPrivate(pP);
 		CCJ.setUserName(allKnowingUsername);
-		
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(CCJ);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringToBeReturned = TCon.sendMessage(gsonString);
 		}
 		catch(Exception e)
@@ -278,16 +256,13 @@ public String getWeatherDegrees() {
 		}
 	}
 	
-//	Get all calendars from database
+//	Get all calendars
 	public String[][] getAllCalendars() {
 		String[][] stringArrayToBeReturned = null;
 		GetAllCalendarJson GAC = new GetAllCalendarJson();
-		
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(GAC);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
 		}
 		catch(Exception e)
@@ -298,21 +273,18 @@ public String getWeatherDegrees() {
 		return stringArrayToBeReturned;
 	}
 	
-//	Get note for event
+//	Get notes
 	public String getNote(String eventID) {
 		String stringToBeReturned = "";
 		String stringFromServer = "";
 		NoteJson NJ = new NoteJson();
 		NJ.setEventID(eventID);
-		
-//		Takes all the variables from user and converts to Json	
 		String gsonString = gson.toJson(NJ);
 		try
 		{
 			stringFromServer = TCon.sendMessage(gsonString);
 			try
 			{
-//		Tries to send the information via TCPConnect class
 				NoteJson NJR = gson.fromJson(stringFromServer, NoteJson.class);
 				stringToBeReturned = "Note for event "+NJR.getEventID()+"\n"+NJR.getNote()+"\n"+"Created by: "+NJR.getCreatedBy()+" "+NJR.getDateTime();
 			}
@@ -337,12 +309,9 @@ public String getWeatherDegrees() {
 		String stringFromServer = "";
 		NoteJson NJ = new NoteJson();
 		NJ.setEventID(eventID);
-		
-//		Takes all the variables from user and converts to Json
 		String gsonString = gson.toJson(NJ);
 		try
 		{
-//		Tries to send the information via TCPConnect class
 			stringFromServer = TCon.sendMessage(gsonString);
 			try
 			{
@@ -363,7 +332,7 @@ public String getWeatherDegrees() {
 		return stringToBeReturned;
 	}
 	
-//	Update note
+//	Update notes
 	public String updateNote(String eventID, String noteText, String allKnowingUsername) {
 		String stringToBeReturned = "";
 		AddNoteJson ANJ = new AddNoteJson();
@@ -383,7 +352,7 @@ public String getWeatherDegrees() {
 		return stringToBeReturned;
 	}
 	
-//	Subscribe another user to calendar 
+//	Subscribe another user
 	public String subsribeOtherUser(String subscriber, String userName, String calendarName) {
 		String stringToBeReturned = "";
 		subscribeUserJson SUJ = new subscribeUserJson();

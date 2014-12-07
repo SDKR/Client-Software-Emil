@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ContainerPanel extends JFrame {
-
-//	GUI initialize
 	public static final String loginScreen = "LoginScreen";
 	public static final String mainMenu = "MainMenu";
 	public static final String createevent = "CreateEvent";
@@ -26,7 +24,7 @@ public class ContainerPanel extends JFrame {
 	private CalendarFunctions CF;
 	private NoteView NV;
 
-//	Container panel contents
+	
 	public ContainerPanel() throws SQLException
 	{
 		setTitle("Doek Calendar Client");
@@ -60,7 +58,6 @@ public class ContainerPanel extends JFrame {
 		
 	}
 		
-//	Getters 
 	public MainMenu getMM() {
 		return MM;
 	}

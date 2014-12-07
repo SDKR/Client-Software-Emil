@@ -16,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
-//Initialize buttons, textfields, and so on.
 public class MainMenu extends JPanel {
 	private JButton btnFCalendar = new JButton("Your Week");
 	private JButton btnCreateEvent = new JButton("Create Event");
@@ -45,7 +44,7 @@ public class MainMenu extends JPanel {
 			setPreferredSize(new Dimension(1366, 768));
 			setLayout(null);
 			
-//			JPanel for daily activities, and ScrollPane
+//			Panel for daily activities
 			
 			scrollPane.setBounds(52, 75, 911, 633);
 			add(scrollPane);
@@ -164,7 +163,6 @@ public class MainMenu extends JPanel {
 			scrollPane.setViewportView(dayTable);
 			scrollPane_1.setBounds(608, 274, 746, 481);
 			
-//		Information labels
 			JLabel lblTodaysCalendar = new JLabel("Todays Calendar");
 			lblTodaysCalendar.setFont(new Font("Tahoma", Font.BOLD, 20));
 			lblTodaysCalendar.setBounds(425, 39, 167, 25);
@@ -195,7 +193,6 @@ public class MainMenu extends JPanel {
 			btnLogOff.setBounds(1037, 419, 250, 75);
 			add(btnLogOff);
 			
-//			Information labels
 			JLabel lblTodaysWeather = new JLabel("Todays Weather");
 			lblTodaysWeather.setFont(new Font("Tahoma", Font.BOLD, 20));
 			lblTodaysWeather.setBounds(1084, 614, 167, 25);
@@ -206,7 +203,7 @@ public class MainMenu extends JPanel {
 			lblQuoteOfThe.setBounds(1074, 505, 177, 25);
 			add(lblQuoteOfThe);
 			
-//			4 JLabels to hold QOTD in 3 line formatting
+//			4 JLabels to hold QOTD
 			lblQotdtxt.setBounds(1084, 541, 203, 14);
 			add(lblQotdtxt);
 			
@@ -223,7 +220,7 @@ public class MainMenu extends JPanel {
 			
 			add(lblAuthor);
 			
-//			3 labels to hold weather information 
+//			3 labels to hold weather
 			lblweatherDeg.setBounds(1131, 650, 156, 14);
 			add(lblweatherDeg);
 			
@@ -233,7 +230,7 @@ public class MainMenu extends JPanel {
 			lblweatherDate.setBounds(1131, 690, 156, 14);
 			add(lblweatherDate);
 			
-//			GUI weather info labes
+//			GUI info labes
 			lblGrader.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblGrader.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblGrader.setBounds(1050, 650, 71, 14);
@@ -252,13 +249,12 @@ public class MainMenu extends JPanel {
 			menuWhite.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Menu white.png")));
 			menuWhite.setBounds(1010, 29, 322, 693);
 			
-//			Menu White background to improve read-ablilty 
+//			Menu White 
 			add(menuWhite);
 			calendarWhite.setIcon(new ImageIcon(MainMenu.class.getResource("/images/White.png")));
 			calendarWhite.setBounds(35, 29, 945, 693);
 			add(calendarWhite);
 			
-//			Sets background image to blue standard design
 			background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
 			background.setBounds(0, 0, 1366, 768);
 			add(background);

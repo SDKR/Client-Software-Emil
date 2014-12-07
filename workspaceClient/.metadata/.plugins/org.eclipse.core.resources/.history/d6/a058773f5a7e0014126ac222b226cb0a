@@ -17,8 +17,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.DefaultComboBoxModel;
 
 public class CreateEvent extends JPanel{
+	
+	
 
-//	Initialize buttons, textfields, and so on.
 	//Buttons
 	private JButton mainMenuBtn = new JButton("Back");
 	private JButton btnCreateEvent = new JButton("Add Event");
@@ -51,7 +52,7 @@ public class CreateEvent extends JPanel{
 		setBounds(0,0,1366,768);
 		
 		/*
-		 * Jlabels describing the needed inputs 
+		 * Jlabels
 		 */
 		JLabel lblAddEvent = new JLabel("Add Event");
 		lblAddEvent.setHorizontalAlignment(SwingConstants.CENTER);
@@ -77,41 +78,45 @@ public class CreateEvent extends JPanel{
 		
 		JLabel lblStartDate = new JLabel("Start Date");
 		lblStartDate.setFont(new Font("Arial", Font.BOLD, 18));
-		lblStartDate.setBounds(439, 263, 86, 22);
+		lblStartDate.setBounds(438, 263, 86, 22);
 		add(lblStartDate);
 		
 		JLabel lblEndDate = new JLabel("End Date");
 		lblEndDate.setFont(new Font("Arial", Font.BOLD, 18));
-		lblEndDate.setBounds(439, 294, 86, 22);
+		lblEndDate.setBounds(438, 294, 86, 22);
 		add(lblEndDate);
 		
 		JLabel lblCalendar = new JLabel("Calendar");
 		lblCalendar.setFont(new Font("Arial", Font.BOLD, 18));
-		lblCalendar.setBounds(439, 329, 78, 22);
+		lblCalendar.setBounds(436, 329, 78, 22);
 		add(lblCalendar);
 		
 		JLabel lblInformation = new JLabel("Information");
 		lblInformation.setFont(new Font("Arial", Font.BOLD, 18));
-		lblInformation.setBounds(439, 367, 100, 22);
+		lblInformation.setBounds(436, 367, 100, 22);
 		add(lblInformation);
 		
 		/*
-		 * Jbuttons 
-		 * Main menu button
+		 * Jbuttons
 		 */
 		mainMenuBtn.setForeground(Color.WHITE);
 		mainMenuBtn.setFont(new Font("Arial", Font.BOLD, 30));
 		mainMenuBtn.setContentAreaFilled(false);
 		mainMenuBtn.setBorder(new CompoundBorder(new BevelBorder(
+
 						BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
+
 								0), new Color(255, 255, 255), new Color(0, 0, 0)),
+
 						new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
+
 								new Color(0, 0, 0), new Color(255, 255, 255),
+
 								new Color(0, 0, 0))));
 		mainMenuBtn.setBounds(543, 647, 163, 43);
 		add(mainMenuBtn);
 		
-//		Create event button
+		
 		btnCreateEvent.setForeground(Color.WHITE);
 		btnCreateEvent.setFont(new Font("Arial", Font.BOLD, 30));
 		btnCreateEvent.setContentAreaFilled(false);
@@ -134,7 +139,7 @@ public class CreateEvent extends JPanel{
 		btnCreateEvent.setBounds(436, 576, 179, 43);
 		add(btnCreateEvent);
 		
-//		Clear fields button
+		
 		btnClearFields.setForeground(Color.WHITE);
 		btnClearFields.setFont(new Font("Arial", Font.BOLD, 30));
 		btnClearFields.setContentAreaFilled(false);
@@ -159,7 +164,6 @@ public class CreateEvent extends JPanel{
 		
 		/*
 		 * TextFields 
-		 * User input field name and additional information
 		 */
 		nameField.setText("Enter Event Name");
 		nameField.setBounds(560, 146, 266, 22);
@@ -171,7 +175,6 @@ public class CreateEvent extends JPanel{
 		add(infoBox);
 		/*
 		 * JComboBox
-		 * JComboboxes to input start and end date information
 		 */
 		typeCombo.setModel(new DefaultComboBoxModel(new String[] {"Choose Type", "Lecture", "Excercise", "Other"}));
 		typeCombo.setBounds(560, 189, 266, 22);
@@ -221,25 +224,29 @@ public class CreateEvent extends JPanel{
 		calendarCombo.setBounds(560, 330, 266, 22);
 		calendarCombo.addItem("Choose Calendar");
 		add(calendarCombo);
-
+//		lbl.setIcon(new ImageIcon(LoginGUI.class.getResource("/img/MetalBackground.jpg")));
 		
 		JLabel lblNewLabel = new JLabel("");
+//		lbl.setIcon(new ImageIcon(LoginGUI.class.getResource("/img/MetalBackground.jpg")));
 		lblNewLabel.setBounds(12, 697, 250, 59);
 		add(lblNewLabel);
 		
-//		Choose location textfield user input
 		txtChooseLocation.setText("Choose Location");
 		txtChooseLocation.setBounds(560, 222, 266, 28);
 		add(txtChooseLocation);
 		txtChooseLocation.setColumns(10);
 		
-//		Sets background image to blue standard design
 		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
 		background.setBounds(0, 0, 1366, 768);
 		add(background);
 	}
+	public JButton getBtnClearFields() {
+		return btnClearFields;
+	}
+	public void setBtnClearFields(JButton btnClearFields) {
+		this.btnClearFields = btnClearFields;
+	}
 	
-//	Action listeners
 	public void backListener(ActionListener l) {
 		mainMenuBtn.addActionListener(l);
 	}
@@ -254,13 +261,6 @@ public class CreateEvent extends JPanel{
 	/*
 	 * Getters and setters
 	 */
-	
-	public JButton getBtnClearFields() {
-		return btnClearFields;
-	}
-	public void setBtnClearFields(JButton btnClearFields) {
-		this.btnClearFields = btnClearFields;
-	}
 	public JTextField getNameField() {
 		return nameField;
 	}
