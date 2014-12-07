@@ -41,6 +41,7 @@ public class CreateEvent extends JPanel{
 	private JComboBox<Object> calendarCombo = new JComboBox<Object>();
 	private JLabel lbl = new JLabel();
 	private JTextField txtChooseLocation = new JTextField();
+	private final JLabel background = new JLabel("");
 
 	/**
 	 * Create the panel.
@@ -179,43 +180,43 @@ public class CreateEvent extends JPanel{
 		typeCombo.setBounds(560, 189, 266, 22);
 		add(typeCombo);
 		
-		startMinute.setBounds(889, 259, 85, 22);
+		startMinute.setBounds(934, 265, 85, 22);
 		startMinute.addItem("MM");
 		add(startMinute);
 		
-		startYear.setBounds(536, 259, 85, 22);
+		startYear.setBounds(560, 265, 85, 22);
 		startYear.addItem("YYYY");
 		add(startYear);
 		
-		startHour.setBounds(803, 259, 85, 22);
+		startHour.setBounds(839, 265, 85, 22);
 		startHour.addItem("HH");
 		add(startHour);
 		
-		startDay.setBounds(704, 259, 85, 22);
+		startDay.setBounds(744, 265, 85, 22);
 		startDay.addItem("DD");
 		add(startDay);
 		
-		startMonth.setBounds(621, 259, 85, 22);
+		startMonth.setBounds(650, 265, 85, 22);
 		startMonth.addItem("MM");
 		add(startMonth);
 		
-		endMinute.setBounds(889, 296, 85, 22);
+		endMinute.setBounds(934, 296, 85, 22);
 		endMinute.addItem("MM");
 		add(endMinute);
 		
-		endYear.setBounds(536, 296, 85, 22);
+		endYear.setBounds(560, 296, 85, 22);
 		endYear.addItem("YYYY");
 		add(endYear);
 		
-		endhour.setBounds(803, 296, 85, 22);
+		endhour.setBounds(839, 296, 85, 22);
 		endhour.addItem("HH");
 		add(endhour);
 		
-		endDay.setBounds(714, 296, 85, 22);
+		endDay.setBounds(744, 296, 85, 22);
 		endDay.addItem("DD");
 		add(endDay);
 		
-		endMonth.setBounds(619, 295, 85, 22);
+		endMonth.setBounds(650, 296, 85, 22);
 		endMonth.addItem("MM");
 		add(endMonth);
 		calendarCombo.setModel(new DefaultComboBoxModel(new String[] {"Choose Calendar", "Ledelse af IS - forandring, innovation og viden (XA)", "Ledelse af IS - forandring, innovation og viden (LA)", "Ledelse af IS - forandring, innovation og viden (XB)", "Makro\u00F8konomi (LA)", "Makro\u00F8konomi (XA)", "Makro\u00F8konomi (XB)", "Virksomhedens \u00F8konomiske styring (3) (LA)", "Distribuerede systemer (LA)"}));
@@ -234,6 +235,10 @@ public class CreateEvent extends JPanel{
 		txtChooseLocation.setBounds(560, 222, 266, 28);
 		add(txtChooseLocation);
 		txtChooseLocation.setColumns(10);
+		
+		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
+		background.setBounds(0, 0, 1366, 768);
+		add(background);
 	}
 	public JButton getBtnClearFields() {
 		return btnClearFields;

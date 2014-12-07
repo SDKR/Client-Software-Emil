@@ -43,4 +43,9 @@
 <fullyQualifiedTypeName name="json.DeleteCalendarJson"/>
 <fullyQualifiedTypeName name="json.CreateCalendarJson"/>
 <fullyQualifiedTypeName name="json.userToCalendar"/>
+<fullyQualifiedTypeName name="json.GetAllCalendarJson"/>
+<fullyQualifiedTypeName name="json.QOTDJson"/>
+<fullyQualifiedTypeName name="java.lang.CharSequence"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 </qualifiedTypeNameHistroy>

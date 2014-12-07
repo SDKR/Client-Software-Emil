@@ -1,0 +1,11 @@
+/.keep
+/AdminWorker.class
+/ClientWorker.class
+/DatabaseLogic
+/Encryption
+/GUI
+/GUILogic
+/JsonClasses
+/SwitchLogic
+/TCPServer.class
+/bcprov-jdk15on-1.51.jar

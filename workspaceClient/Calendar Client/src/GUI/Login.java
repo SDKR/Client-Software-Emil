@@ -33,6 +33,7 @@ import javax.swing.JTextPane;
 		private JPasswordField PasswordIn = new JPasswordField();
 		private JTextField EmailIn = new JTextField();
 		private JButton btnLogin = new JButton("Login");
+		private final JLabel background = new JLabel("");
 
 		
 //		The panel itself
@@ -76,7 +77,9 @@ import javax.swing.JTextPane;
 			btnLogin.setBounds(623, 492, 119, 41);
 			add(btnLogin);
 			
-
+			background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
+			background.setBounds(0, 0, 1366, 768);
+			add(background);
 			
 		}
 		

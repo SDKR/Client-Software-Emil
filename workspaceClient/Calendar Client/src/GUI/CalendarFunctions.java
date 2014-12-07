@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -22,6 +23,12 @@ public class CalendarFunctions extends JPanel {
 	private JTextField createField = new JTextField();
 	private JTextField deleteField = new JTextField();
 	private JComboBox createCombo = new JComboBox();
+	private final JLabel background = new JLabel("");
+	private JButton btnUnsubscribe = new JButton("Unsubscribe");
+	private JTextField unSubtextField = new JTextField();
+	private JTextField calendarField;
+	private JTextField usernameField;
+	private JButton btnAddUser = new JButton("Add User");
 
 	/**
 	 * Create the panel.
@@ -37,7 +44,7 @@ public class CalendarFunctions extends JPanel {
 		add(btnMainMenu);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 645, 742);
+		scrollPane.setBounds(12, 13, 419, 742);
 		add(scrollPane);
 		
 		
@@ -202,6 +209,59 @@ public class CalendarFunctions extends JPanel {
 		
 		btnDeleteCalendar.setBounds(667, 388, 123, 25);
 		add(btnDeleteCalendar);
+		
+		JLabel lblUnsubscribeCalendar = new JLabel("Unsubscribe calendar");
+		lblUnsubscribeCalendar.setBounds(902, 13, 124, 16);
+		add(lblUnsubscribeCalendar);
+		
+		JLabel label_1 = new JLabel("Calendar Name: ");
+		label_1.setBounds(902, 36, 97, 16);
+		add(label_1);
+		
+//		Unsub
+		unSubtextField.setColumns(10);
+		unSubtextField.setBounds(1011, 33, 116, 22);
+		add(unSubtextField);
+		
+		btnUnsubscribe.setBounds(902, 65, 97, 25);
+		add(btnUnsubscribe);
+		
+		JLabel lblSubscribeUsersTo = new JLabel("Subscribe users to yor Calendar");
+		lblSubscribeUsersTo.setBounds(667, 447, 183, 16);
+		add(lblSubscribeUsersTo);
+		
+		JLabel lblCalendar = new JLabel("Calendar:");
+		lblCalendar.setBounds(667, 482, 56, 16);
+		add(lblCalendar);
+		
+		JLabel lblUsername = new JLabel("Username: ");
+		lblUsername.setBounds(874, 482, 67, 16);
+		add(lblUsername);
+		
+		calendarField = new JTextField();
+		calendarField.setBounds(734, 479, 116, 22);
+		add(calendarField);
+		calendarField.setColumns(10);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(953, 479, 116, 22);
+		add(usernameField);
+		usernameField.setColumns(10);
+		
+		btnAddUser.setBounds(667, 511, 97, 25);
+		add(btnAddUser);
+		
+		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
+		background.setBounds(0, 0, 1366, 768);
+		add(background);
+	}
+
+	public JButton getBtnUnsubscribe() {
+		return btnUnsubscribe;
+	}
+
+	public JTextField getUnSubtextField() {
+		return unSubtextField;
 	}
 
 	public JButton getBtnSubscribe() {
@@ -239,6 +299,14 @@ public class CalendarFunctions extends JPanel {
 	public JTable getCalendarTable() {
 		return calendarTable;
 	}
+	public JTextField getCalendarField() {
+		return calendarField;
+	}
+
+	public JTextField getUsernameField() {
+		return usernameField;
+	}
+	
 	public void subscribeListener(ActionListener l)
 	{
 		btnSubscribe.addActionListener(l);
@@ -255,4 +323,13 @@ public class CalendarFunctions extends JPanel {
 	{
 		btnMainMenu.addActionListener(l);
 	}
+	public void btnUnsubscribeListener (ActionListener l)
+	{
+		btnUnsubscribe.addActionListener(l);
+	}
+	public void otherUserSubscribe(ActionListener l)
+	{
+		btnAddUser.addActionListener(l);
+	}
+	
 }

@@ -12,6 +12,7 @@ public class ContainerPanel extends JFrame {
 	public static final String createevent = "CreateEvent";
 	public static final String WeeklyCalendar = "WeeklyCalendar";
 	public static final String CalendarFunctions = "CalendarFunctions";
+	public static final String NoteView = "NoteView";
 	
 	private static JPanel contentPane;
 	CardLayout c;
@@ -21,6 +22,7 @@ public class ContainerPanel extends JFrame {
 	private WeeklyCalendar WC;
 	private MainMenu MM;
 	private CalendarFunctions CF;
+	private NoteView NV;
 
 	
 	public ContainerPanel() throws SQLException
@@ -51,6 +53,8 @@ public class ContainerPanel extends JFrame {
 		CF = new CalendarFunctions();
 		contentPane.add(CF, CalendarFunctions);
 		
+		NV = new NoteView();
+		contentPane.add(NV, NoteView);
 		
 	}
 		
@@ -72,6 +76,10 @@ public class ContainerPanel extends JFrame {
 	
 	public Login getLI() {
 		return LI;
+	}
+	
+	public NoteView getNV() {
+		return NV;
 	}
 
 	public void show(String card){

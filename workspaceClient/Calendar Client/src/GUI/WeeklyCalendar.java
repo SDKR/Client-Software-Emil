@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -15,6 +17,7 @@ public class WeeklyCalendar extends JPanel {
 	private JButton btnBack = new JButton("Back");
 	private JTable weekTable = new JTable();
 	private final JScrollPane scrollPane_1 = new JScrollPane();
+	private final JLabel background = new JLabel("");
 	
 	public WeeklyCalendar() {
 		
@@ -140,8 +143,13 @@ public class WeeklyCalendar extends JPanel {
 		
 		scrollPane_1.setViewportView(weekTable);
 		
+		background.setIcon(new ImageIcon(MainMenu.class.getResource("/images/Baggrund client.jpg")));
+		background.setBounds(0, 0, 1366, 768);
+		add(background);
 
 	}
+	
+	
 	
 //	Action listeners
 	public void addActionListenerbtnBack(ActionListener l){
