@@ -165,7 +165,7 @@ public String getWeatherDegrees() {
 		String gsonString = gson.toJson(EDJ);
 		try
 		{ 
-
+//		Tries to send the information via TCPConnect class
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
 		}
 		catch(Exception e)
@@ -383,7 +383,7 @@ public String getWeatherDegrees() {
 		return stringToBeReturned;
 	}
 	
-//	Subscribe another user to calendar
+//	Subscribe another user to calendar 
 	public String subsribeOtherUser(String subscriber, String userName, String calendarName) {
 		String stringToBeReturned = "";
 		subscribeUserJson SUJ = new subscribeUserJson();

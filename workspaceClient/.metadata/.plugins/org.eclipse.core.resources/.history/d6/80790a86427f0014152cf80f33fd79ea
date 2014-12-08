@@ -165,7 +165,7 @@ public String getWeatherDegrees() {
 		String gsonString = gson.toJson(EDJ);
 		try
 		{ 
-
+//		Tries to send the information via TCPConnect class
 			stringArrayToBeReturned = gson.fromJson(TCon.sendMessage(gsonString), String[][].class);
 		}
 		catch(Exception e)

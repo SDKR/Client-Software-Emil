@@ -21,7 +21,6 @@
 <fullyQualifiedTypeName name="GUILogic.Logic.goToUserCreation"/>
 <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="json.AuthUserJson"/>
 <fullyQualifiedTypeName name="com.google.gson.Gson"/>
@@ -37,7 +36,6 @@
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JTable"/>
 <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
-<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="json.EventsWeekJson"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="json.DeleteCalendarJson"/>
@@ -48,4 +46,11 @@
 <fullyQualifiedTypeName name="java.lang.CharSequence"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="GUILogic.Logic.Note"/>
+<fullyQualifiedTypeName name="json.NoteJson"/>
+<fullyQualifiedTypeName name="json.AddNoteJson"/>
+<fullyQualifiedTypeName name="GUI.NoteView"/>
+<fullyQualifiedTypeName name="json.subscribeUserJson"/>
 </qualifiedTypeNameHistroy>

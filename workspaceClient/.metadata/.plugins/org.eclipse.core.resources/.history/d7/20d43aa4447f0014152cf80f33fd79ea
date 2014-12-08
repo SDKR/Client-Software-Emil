@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import json.QOTDJson;
 import connections.ServerManager;
 import GUI.ContainerPanel;
 import GUI.MainMenu;
+import GUI.NoteView;
 import connections.ServerManager;
 import GUI.CreateEvent;
 
@@ -18,7 +20,7 @@ public class Logic {
 	private CreateEvent CE;
 	private WeeklyCalendar WC;
 	private CalendarFunctions CF;
-	
+	private NoteView NV;
 	
 	private String EmailKeeper; /* skal måske bruges senere */
 	private String PassKeeper; /* skal måske bruges senere */
@@ -37,6 +39,8 @@ public class Logic {
 		CP.setVisible(true);
 	}
 	
+//	General menu button functions 
+	
 //	Login function and error message
 	private class login implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -47,10 +51,15 @@ public class Logic {
 				setUserKeeper(emailInput);
 				System.out.println("Så langt så godt");
 				CP.show(ContainerPanel.mainMenu); 	/*Show main menu*/
-				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
-				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
-				setDayView();
-				setWeekView();
+//				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
+//				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
+				setDayView(); /*Gets todays calendar info for the main menu*/
+				quoteFormat(); /*Formats and inserts qoute into label*/
+				weatherFormat(); /*Formats and inserts weather into label*/
+				
+//				Clear fields
+		CP.getLI().getTextFieldEmail().setText("");
+		CP.getLI().getTextFieldPassword().setText("");
 				
 			}
 			else
@@ -60,42 +69,128 @@ public class Logic {
 		}
 	}
 	
-//	LogOff button
+//	LogOff button - shows login screen
 	private class LogOff implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.loginScreen);
 		
 		}}
 	
-//	Weekly Calendar Button
+//	Weekly Calendar Button - shows the week view panel
 	private class WeeklyCalendar implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.WeeklyCalendar);
+			setWeekView(); /*Gets this weeks calendar info for this menu*/
 			
 		}}
 		
-//	Calendar Functions Button
+//	Calendar Functions Button - shows the calendar functions menu
 	private class CalendarFunctions implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			CP.show(ContainerPanel.CalendarFunctions);		
+			CP.show(ContainerPanel.CalendarFunctions);
+			getCalendars(); /*Runs the get all calendars function in the menu*/
 		}}
 	
-//	Back button
+//	Back button - shows Main menu
 	private class Back implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.mainMenu);
+			setDayView(); /*Gets todays calendar info for the main menu*/
+			quoteFormat(); /*Formats and inserts qoute into label*/
+			weatherFormat(); /*Formats and inserts weather into label*/
 	} 
 		}
 		
-//	Create Eventmenu button
+//	Create Eventmenu button - shows the create event menu
 	private class Event implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.createevent);
-			setComboDates();
+			setComboDates(); /*Runs the logic that fills combo dates GUI*/
 		}
 	}
 	
-//	Logic for the comboboxes in createEvent
+//	Note Menu button - Show the Note menu 
+	private class Note implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			CP.show(ContainerPanel.NoteView);
+	} 
+		}
+	
+//	Supporting GUI Logic 
+	
+//	Divides the quote up into parts if it is too damn long
+//	Divides it into 1-2 or 3 parts, quote cant be longer than 126 characters.
+	private void quoteFormat()
+	{
+		SM.quoteCheck();
+		String quoteBody = SM.getQuoteOutput();
+		int quoteLength = quoteBody.length();
+		System.out.println(quoteLength);
+		CP.getMM().getLblQotdtxt().setText(SM.getQouteAuthor());
+		//
+		if(quoteLength>42) /*If the qoute is longer than 42 characters*/
+		{
+			CharSequence firstHalf = quoteBody.subSequence(0, 42)+"-";
+			CharSequence secondHalf = quoteBody.subSequence(42, quoteLength);
+
+			String partOne = firstHalf.toString();
+			String partTwo = secondHalf.toString();
+//			String partThree = thirdHalf.toString();
+			
+			CP.getMM().getLblQotdtxt_1().setText(partOne);
+			CP.getMM().getLblQotdtxt_2().setText(partTwo);
+//			CP.getMM().getLblQotdtxt_3().setText(partThree);
+		}
+		else if (quoteLength>84) /*If the qoute is longer than 84 characters*/
+		{
+			CharSequence firstHalf = quoteBody.subSequence(0, 42)+"-";
+			CharSequence secondHalf = quoteBody.subSequence(42, 84)+"-";
+			CharSequence thirdHalf = quoteBody.subSequence(84, quoteLength);
+			String partOne = firstHalf.toString();
+			String partTwo = secondHalf.toString();
+			String partThree = thirdHalf.toString();
+			
+			CP.getMM().getLblQotdtxt_1().setText(partOne);
+			CP.getMM().getLblQotdtxt_2().setText(partTwo);
+			CP.getMM().getLblQotdtxt_3().setText(partThree);
+		}
+		
+		else /*If the qoute is shorter than 42 characters*/
+		{
+			CP.getMM().getLblQotdtxt_1().setText(quoteBody);
+		}
+	}
+	
+//	Weather function formatting 
+//	Formats date to fit GUI
+//	Changes first letter of decription to upper case
+	private void weatherFormat()
+	{
+		SM.weatherCheck();
+		
+		String weatherDeg = SM.getWeatherDegrees();
+		String weatherDec = SM.getWeatherDecription();
+		String weatherDate = SM.getWeatherDate();
+		
+		
+		System.out.println(weatherDate);
+		
+//		Format Date
+		CharSequence weathDate = weatherDate.subSequence(0, 10);
+		String wDate = weathDate.toString();
+		
+//		Format description to uppercase
+		String wDesc = weatherDec.substring(0, 1).toUpperCase() + weatherDec.substring(1);
+		
+		CP.getMM().getLblweatherDeg().setText(weatherDeg);
+		CP.getMM().getLblweatherDesc().setText(wDesc);
+		CP.getMM().getLblweatherDate().setText(wDate);
+	}
+	
+	
+//	Logic for the comboboxes in createEvent 
+//	Set comboboxes with following options:
+//	Year 2014-2037, Month 1- 12, day 1 -31, Hour 1-24, minute 1-59
 	public void setComboDates() {
 		for (int yCount = 2014; yCount < 2038; yCount++) {
 
@@ -120,7 +215,9 @@ public class Logic {
 		}
 	}
 	
-//	Create event logic
+//	Create event logic // Get all the inputs!
+//	Gets users input when creating an event variables include
+//	Name, location, info, type, start and end time, calendar 
 	private class createEvent implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 	
@@ -157,22 +254,106 @@ public class Logic {
 		}
 	}
 	
-//	Subscribe to calendar function
+//	Update a note 
+//	Users input is gotten from GUI and sent to update current note
+	private class updateNotes implements ActionListener{
+		public void actionPerformed (ActionEvent e)
+		{
+			String eventID = CP.getNV().getEventIDField().getText();
+			String noteText = CP.getNV().getNoteTextArea().getText();
+			String stringToBeReturned = SM.updateNote(eventID, noteText, UserKeeper);
+			
+			CP.getNV().getUpdateNoteBtn().setEnabled(false);	
+		}
+	}
+	
+
+//view the note // Still being implemented
+//	#
+private class viewNote implements ActionListener{
+	public void actionPerformed (ActionEvent e)
+	{
+		String eventID = JOptionPane.showInputDialog("Enter EventID of note to see");
+		String note = SM.getNote(eventID);
+		JOptionPane.showMessageDialog(null, note, "Note View", JOptionPane.PLAIN_MESSAGE);
+	}
+}
+
+//Get note contents
+//	Asks server for contens of note, checks if user input is empty beforehand
+private class getNoteText implements ActionListener{
+	public void actionPerformed (ActionEvent e)
+	{
+		String eventID = CP.getNV().getEventIDField().getText();
+		if(!eventID.equals(""))
+		{
+			String note = SM.getNoteText(eventID);
+			CP.getNV().getNoteTextArea().setText(note);
+			CP.getNV().getUpdateNoteBtn().setEnabled(true);
+		}
+		else
+//	Error message if userinput is empty
+		{
+			CP.getNV().getEventIDField().setText("");
+			JOptionPane.showMessageDialog (null, "You have to enter an Event ID", "Information", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+}
+	
+//	Subscribe to calendar button
+//	Takes userinput here calendarname, and users login, before sedning it to server
 	private class subscribeToCalendar implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
 			String calendarName = CP.getCF().getSubscribeField().getText();
 			SM.useToCalendar(UserKeeper, calendarName);
+			getCalendars(); /*updates table with new information*/
 		}
 	}
+	
+//	Unsubscribe to calendar function
+//	Takes userinput here calendarname, and users login, before sedning it to server
+	private class unSubscribeToCalendar implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String calendarName = CP.getCF().getUnSubtextField().getText();
+			SM.UnSubScribeCalendar(UserKeeper, calendarName);
+			getCalendars(); /*updates table with new information*/
+		}
+	}
+	
+//	Subscribe other user to calendar
+//	Username, user to be subscribed and calendar name is sent
+//	To server for subscribsion
+	private class subscribeOtherUser implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String userName = CP.getCF().getCalendarField().getText();
+			String calendarName = CP.getCF().getUsernameField().getText();
+			
+//	Checks if input is empty
+			if(!userName.equals("") || !calendarName.equals(""))
+			{
+				SM.subsribeOtherUser(UserKeeper, userName, calendarName);
+				
+			}
+			else
+			{
+				System.out.println("You have to enter both a user and calendar!");
+			}
+		}
+	}
+	
 //	Create calendar function
+//	Takes inputs from user calendarName, comboText
 	private class createCalendars implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
 			String calendarName = CP.getCF().getCreateField().getText();
 			String comboText = CP.getCF().getCreateCombo().getSelectedItem().toString();
 			int PP = 0;
-			System.out.println(comboText);
+			
+//	Checks if calendar is private
 			if(comboText.equals("Private"))
 			{
 				PP = 2;
@@ -181,20 +362,24 @@ public class Logic {
 			{
 				PP = 1;
 			}
-			System.out.println(PP);
+
 			SM.createCalendar(calendarName, PP, UserKeeper);
 		}
 	}
+	
 //	Delete calendar function
 	private class deleteCalendar implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
 			String calendarName = CP.getCF().getDeleteField().getText();
+			
+//	Checks if input is empty
 			if(!calendarName.equals(""))
 			{
 				SM.deleteCalendar(calendarName, UserKeeper);
 			}
 			else
+//	If empty delete input and send error information to user
 			{
 				CP.getCF().getDeleteField().setText("");
 				JOptionPane.showMessageDialog (null, "You have to enter the name of a calendar to delete", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -202,7 +387,8 @@ public class Logic {
 		}
 	}
 	
-//	Day view logic
+//	Day view logic // Main menu
+//	Fills out the array in the main menu with todays events
 	private void setDayView()
 	{
 		String[][] dayDate = SM.daysevents(UserKeeper);
@@ -210,7 +396,6 @@ public class Logic {
 		int arrayChecker = 0;
 		int arrayCheckerPlus = 0;
 		for (int reset = 1; reset < 99; reset++) {
-//			System.out.println("Vi er inde i for-loop " + reset + ". gang");
 			// Sets every field in a Jtable equals nothing
 			CP.getMM().getDayTable().setValueAt(null, reset, 0);
 			CP.getMM().getDayTable().setValueAt(null, reset, 1);
@@ -223,9 +408,9 @@ public class Logic {
 		while (arrayChecker < arrayCounter) {
 			try
 			{
+//	Hvis arrayet er tomt fyld noget i det
 				if(!dayDate[0][arrayChecker].isEmpty())
 				{
-//				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
 				CP.getMM().getDayTable().setValueAt(dayDate[0][arrayChecker], arrayCheckerPlus, 0);
 				CP.getMM().getDayTable().setValueAt(dayDate[1][arrayChecker], arrayCheckerPlus, 1);
 				CP.getMM().getDayTable().setValueAt(dayDate[2][arrayChecker], arrayCheckerPlus, 2);
@@ -243,6 +428,7 @@ public class Logic {
 		}
 	}
 	
+//	Week view logic // For the Your Week menu 
 	private void setWeekView()
 	{
 		String[][] weekDate = SM.getEventsFromUSerWeek(UserKeeper);
@@ -250,7 +436,6 @@ public class Logic {
 		int arrayChecker = 0;
 		int arrayCheckerPlus = 0;
 		for (int reset = 1; reset < 99; reset++) {
-			System.out.println("Vi er inde i for-loop " + reset + ". gang");
 			// Sets every field in a Jtable equals nothing
 			CP.getWC().getWeekTable().setValueAt(null, reset, 0);
 			CP.getWC().getWeekTable().setValueAt(null, reset, 1);
@@ -262,9 +447,9 @@ public class Logic {
 		while (arrayChecker < arrayCounter) {
 			try
 			{
+//	Fills the array
 				if(!weekDate[0][arrayChecker].isEmpty())
 				{
-				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
 				CP.getWC().getWeekTable().setValueAt(weekDate[0][arrayChecker], arrayCheckerPlus, 0);
 				CP.getWC().getWeekTable().setValueAt(weekDate[1][arrayChecker], arrayCheckerPlus, 1);
 				CP.getWC().getWeekTable().setValueAt(weekDate[2][arrayChecker], arrayCheckerPlus, 2);
@@ -283,6 +468,50 @@ public class Logic {
 		
 	}
 	
+//	Gets all calendars for the calendar functions GUI 
+	private void getCalendars()
+	{
+		String[][] calendarData = SM.getAllCalendars();
+		System.out.println(calendarData[1][1]);
+		int arrayCounter = calendarData[0].length;
+		int arrayChecker = 0;
+		int arrayCheckerPlus = 0;
+		for (int reset = 1; reset < 99; reset++) {
+			System.out.println("Vi er inde i for-loop " + reset + ". gang");
+			// Sets every field in a Jtable equals nothing
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 0);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 1);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 2);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 3);
+			CP.getCF().getCalendarTable().setValueAt(null, reset, 4);
+		}
+
+		while (arrayChecker < arrayCounter) {
+			try
+			{
+//	Fills the array
+				if(!calendarData[0][arrayChecker].isEmpty())
+				{
+				System.out.println("Vi er inde i while-loop " + arrayChecker+ ". gang");
+				CP.getCF().getCalendarTable().setValueAt(calendarData[0][arrayChecker], arrayCheckerPlus, 0);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[1][arrayChecker], arrayCheckerPlus, 1);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[2][arrayChecker], arrayCheckerPlus, 2);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[3][arrayChecker], arrayCheckerPlus, 3);
+				CP.getCF().getCalendarTable().setValueAt(calendarData[4][arrayChecker], arrayCheckerPlus, 4);
+				arrayChecker++;
+				arrayCheckerPlus++;
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Well... We Try again");
+				arrayChecker++;
+			}
+		}
+	}	
+
+	
+	
 //	Initializelist for listeners
 	private void initializeListeners() {
 		CP.getLI().addActionListenerLoginScreen(new login());
@@ -297,9 +526,17 @@ public class Logic {
 		CP.getCF().deleteCalendarListener(new deleteCalendar());
 		CP.getCF().subscribeListener(new subscribeToCalendar());
 		CP.getCF().createCalendarListener(new createCalendars());
+		CP.getCF().btnUnsubscribeListener(new unSubscribeToCalendar());
+		CP.getCF().otherUserSubscribe(new subscribeOtherUser());
+		CP.getMM().addActionListenerNotes (new Note());
+		CP.getNV().getNoteListener(new getNoteText());
+		CP.getNV().addNoteListener(new updateNotes());
+		CP.getNV().mainMenuListener(new Back());
 		
 	}
 
+//	Getters and setters list
+	
 	public int getAdminKeeper() {
 		return AdminKeeper;
 	}

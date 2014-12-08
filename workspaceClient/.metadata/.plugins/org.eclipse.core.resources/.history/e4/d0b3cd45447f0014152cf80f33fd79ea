@@ -49,7 +49,7 @@ public class CalendarFunctions extends JPanel {
 		
 //	JScrollPane followed by the Jtable holding all the calendar data.
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 645, 742);
+		scrollPane.setBounds(12, 13, 419, 742);
 		add(scrollPane);
 		
 		
@@ -157,7 +157,7 @@ public class CalendarFunctions extends JPanel {
 				{null, null, null, null, null},
 			},
 			new String[] {
-				"CalendarID", "Name", "Active", "Created By", "Private Public"
+				"New column", "New column", "New column", "New column", "New column"
 			}
 		));
 		scrollPane.setViewportView(calendarTable);

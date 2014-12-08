@@ -364,6 +364,7 @@ private class getNoteText implements ActionListener{
 			}
 
 			SM.createCalendar(calendarName, PP, UserKeeper);
+			getCalendars(); /*Runs the get all calendars function in the menu*/
 		}
 	}
 	
@@ -377,6 +378,7 @@ private class getNoteText implements ActionListener{
 			if(!calendarName.equals(""))
 			{
 				SM.deleteCalendar(calendarName, UserKeeper);
+				getCalendars(); /*Runs the get all calendars function in the menu*/
 			}
 			else
 //	If empty delete input and send error information to user
