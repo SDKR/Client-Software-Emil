@@ -54,8 +54,8 @@ public class Logic {
 //				CP.getMM().getWeatherbox().setText(SM.weatherCheck()); /*Weather from server*/
 //				CP.getMM().getQOTDtxt().setText(SM.quoteCheck()); /*QOTD from server*/
 				setDayView(); /*Gets todays calendar info for the main menu*/
-				quoteFormat(); /*Formats and inserts qoute into label*/
-				weatherFormat(); /*Formats and inserts weather into label*/
+				quoteFormat();
+				weatherFormat();
 				
 //				Clear fields
 		CP.getLI().getTextFieldEmail().setText("");
@@ -95,9 +95,6 @@ public class Logic {
 	private class Back implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			CP.show(ContainerPanel.mainMenu);
-			setDayView(); /*Gets todays calendar info for the main menu*/
-			quoteFormat(); /*Formats and inserts qoute into label*/
-			weatherFormat(); /*Formats and inserts weather into label*/
 	} 
 		}
 		

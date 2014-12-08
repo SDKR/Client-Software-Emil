@@ -139,7 +139,7 @@ public class WeeklyCalendar extends JPanel {
 				{null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"CalendarID", "Location", "Start Time", "End Time", "Information", "New column", "New column"
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column"
 			}
 		));
 		
